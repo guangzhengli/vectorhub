@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
+    "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "^4.16.1",
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.4",
@@ -37,6 +38,7 @@
     "mammoth": "^1.6.0",
     "multer": "^1.4.5-lts.1",
     "next": "13.2.4",
+    "next-auth": "^4.22.1",
     "next-i18next": "^13.2.2",
     "node-fetch": "^3.3.1",
     "openai": "^3.2.1",
