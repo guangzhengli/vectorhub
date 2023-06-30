@@ -1,16 +1,12 @@
-import { ChatFolder, Conversation, KeyConfiguration, KeyValuePair } from '@/types';
-import {
-  IconArrowBarLeft,
-  IconFolderPlus,
-  IconMessagesOff,
-  IconPlus,
-} from '@tabler/icons-react';
-import { FC, useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
-import { Conversations } from './Conversations';
-import { Folders } from './Folders';
-import { Search } from './Search';
-import { SidebarSettings } from './SidebarSettings';
+import {ChatFolder, Conversation, KeyConfiguration, KeyValuePair} from '@/types';
+import {IconArrowBarLeft, IconFolderPlus, IconMessagesOff, IconPlus,} from '@tabler/icons-react';
+import {FC, useEffect, useState} from 'react';
+import {useTranslation} from 'next-i18next';
+import {Conversations} from './Conversations';
+import {Folders} from './Folders';
+import {Search} from './Search';
+import {SidebarSettings} from './SidebarSettings';
+import {Profile} from "@/components/Sidebar/Profile";
 
 interface Props {
   loading: boolean;
@@ -122,6 +118,7 @@ export const Sidebar: FC<Props> = ({
     <aside
       className={`fixed top-0 bottom-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 transition-all sm:relative sm:top-0`}
     >
+      <Profile />
       <header className="flex items-center">
         <button
           className="flex w-[190px] flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-[12.5px] leading-3 text-white transition-colors duration-200 select-none hover:bg-gray-500/10"
