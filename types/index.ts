@@ -34,12 +34,6 @@ export interface KeyValuePair {
   value: any;
 }
 
-export interface ErrorMessage {
-  code: String | null;
-  title: String;
-  messageLines: String[];
-}
-
 export interface LlamaIndex {
   indexName: string;
   indexType: string;
@@ -54,4 +48,27 @@ export interface KeyConfiguration {
   azureApiVersion?: string;
   azureDeploymentName?: string;
   azureEmbeddingDeploymentName?: string;
+}
+
+export interface Index {
+  id: string;
+  name: string;
+  description: string;
+  prompt?: string;
+  tags?: string[];
+  questions?: string[];
+  published: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  authorId?: string;
+  author?: User;
+}
+
+export interface User {
+  id: string;
+  name?: string;
+  email?: string;
+  emailVerified?: Date;
+  image?: string;
+  indexes?: Index[];
 }
