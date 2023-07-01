@@ -28,7 +28,7 @@ export const KeySettingsAlertDialog: FC<Props> = ({
                     <AlertDialogHeader>
                         <AlertDialogTitle>You need to configure the OpenAI key for use.</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This is an open-source project and we need your own key. We will not store your key, or you can set up the ChatFiles service by yourself.
+                            This is an open-source project and we need your own key. We will not store your key, or you can set up the vectorhub service by yourself.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>

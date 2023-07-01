@@ -1,8 +1,8 @@
 version: '2.2'
 services:
-  chatfiles:
-    image: guangzhengli/chatfiles:latest
-    container_name: chatfiles
+  vectorhub:
+    image: guangzhengli/vectorhub:latest
+    container_name: vectorhub
     ports:
       - 3000:3000
     environment:

@@ -12,7 +12,7 @@ export default function Document(props: Props) {
     <Html lang={currentLocale}>
       <Head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-title" content="ChatFiles"></meta>
+        <meta name="apple-mobile-web-app-title" content="VectorHub"></meta>
       </Head>
       <body>
         <Main />

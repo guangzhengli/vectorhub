@@ -25,10 +25,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push chatfiles image
+        name: Build and push vectorhub image
         uses: docker/build-push-action@v4
         with:
           platforms: linux/amd64,linux/arm64
           context: .
           push: true
-          tags: guangzhengli/chatfiles:latest
+          tags: guangzhengli/vectorhub:latest
