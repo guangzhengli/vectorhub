@@ -1,4 +1,3 @@
-import {Conversation, KeyConfiguration, KeyValuePair, Message,} from '@/types';
 import {throttle} from '@/utils';
 import {IconClearAll} from '@tabler/icons-react';
 import {useTranslation} from 'next-i18next';
@@ -9,6 +8,9 @@ import {ChatMessage} from './ChatMessage';
 import {Upload} from "@/components/Chat/Upload";
 import {CHAT_FILES_MAX_SIZE} from "@/utils/app/const";
 import {humanFileSize} from "@/utils/app/files";
+import {KeyValuePair, Message} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 interface Props {
   conversation: Conversation;

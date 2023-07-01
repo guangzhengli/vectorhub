@@ -1,6 +1,7 @@
-import { ChatFolder, Conversation, KeyValuePair } from '@/types';
-import { FC } from 'react';
-import { Folder } from './Folder';
+import {FC} from 'react';
+import {Folder} from './Folder';
+import {ChatFolder, KeyValuePair} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
 
 interface Props {
   searchTerm: string;

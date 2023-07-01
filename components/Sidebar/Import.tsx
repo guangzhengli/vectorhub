@@ -1,9 +1,10 @@
-import { ChatFolder, Conversation } from '@/types';
-import { cleanConversationHistory } from '@/utils/app/clean';
-import { IconFileImport } from '@tabler/icons-react';
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
-import { SidebarButton } from './SidebarButton';
+import {ChatFolder} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
+import {cleanConversationHistory} from '@/utils/app/clean';
+import {IconFileImport} from '@tabler/icons-react';
+import {useTranslation} from 'next-i18next';
+import {FC} from 'react';
+import {SidebarButton} from './SidebarButton';
 
 interface Props {
   onImport: (data: {

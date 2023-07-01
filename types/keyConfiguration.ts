@@ -1,4 +1,4 @@
-import {ModelType} from "@/types/index";
+import {ModelType} from "@/types/chat";
 
 export interface KeyConfiguration {
   apiType?: ModelType;

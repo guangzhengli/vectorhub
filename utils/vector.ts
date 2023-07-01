@@ -1,9 +1,10 @@
 import {SupabaseFilterRPCCall, SupabaseVectorStore} from "langchain/vectorstores/supabase";
 import {createClient} from "@supabase/supabase-js";
 import {Document} from "langchain/dist/document";
-import {OPENAI_TYPE, SUPABASE_KEY, SUPABASE_URL} from "@/utils/app/const";
+import {SUPABASE_KEY, SUPABASE_URL} from "@/utils/app/const";
 import {getEmbeddings} from "@/utils/embeddings";
-import { KeyConfiguration, ModelType } from "@/types";
+import {KeyConfiguration} from "@/types/keyConfiguration";
+import {ModelType} from "@/types/chat";
 
 
 const client = createClient(SUPABASE_URL!, SUPABASE_KEY!);

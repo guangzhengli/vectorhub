@@ -1,12 +1,7 @@
-import { Conversation, KeyValuePair } from '@/types';
-import {
-  IconCheck,
-  IconMessage,
-  IconPencil,
-  IconTrash,
-  IconX,
-} from '@tabler/icons-react';
-import { DragEvent, FC, KeyboardEvent, useEffect, useState } from 'react';
+import {KeyValuePair} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
+import {IconCheck, IconMessage, IconPencil, IconTrash, IconX,} from '@tabler/icons-react';
+import {DragEvent, FC, KeyboardEvent, useEffect, useState} from 'react';
 
 interface Props {
   selectedConversation: Conversation;

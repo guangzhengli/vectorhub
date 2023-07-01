@@ -1,13 +1,13 @@
-import { Message } from '@/types';
-import { IconEdit } from '@tabler/icons-react';
-import { useTranslation } from 'next-i18next';
-import { FC, useEffect, useRef, useState, memo } from 'react';
+import {IconEdit} from '@tabler/icons-react';
+import {useTranslation} from 'next-i18next';
+import {FC, memo, useEffect, useRef, useState} from 'react';
 import rehypeMathjax from 'rehype-mathjax';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
-import { CodeBlock } from '../Markdown/CodeBlock';
-import { MemoizedReactMarkdown } from '../Markdown/MemoizedReactMarkdown';
-import { CopyButton } from './CopyButton';
+import {CodeBlock} from '../Markdown/CodeBlock';
+import {MemoizedReactMarkdown} from '../Markdown/MemoizedReactMarkdown';
+import {CopyButton} from './CopyButton';
+import {Message} from "@/types/chat";
 
 interface Props {
   message: Message;

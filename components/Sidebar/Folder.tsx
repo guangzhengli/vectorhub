@@ -1,14 +1,8 @@
-import { ChatFolder, Conversation, KeyValuePair } from '@/types';
-import {
-  IconCaretDown,
-  IconCaretRight,
-  IconCheck,
-  IconPencil,
-  IconTrash,
-  IconX,
-} from '@tabler/icons-react';
-import { FC, KeyboardEvent, useEffect, useState } from 'react';
-import { ConversationComponent } from './Conversation';
+import {IconCaretDown, IconCaretRight, IconCheck, IconPencil, IconTrash, IconX,} from '@tabler/icons-react';
+import {FC, KeyboardEvent, useEffect, useState} from 'react';
+import {ConversationComponent} from './Conversation';
+import {ChatFolder, KeyValuePair} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
 
 interface Props {
   searchTerm: string;

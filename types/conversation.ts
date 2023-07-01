@@ -1,5 +1,5 @@
 import {LlamaIndex} from "@/types/llamaIndex";
-import {Message} from "@/types/index";
+import {Message} from "@/types/chat";
 
 export interface Conversation {
   id: number;

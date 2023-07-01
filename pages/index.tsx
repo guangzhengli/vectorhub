@@ -1,7 +1,6 @@
 import {Chat} from '@/components/Chat/Chat';
 import {Navbar} from '@/components/Mobile/Navbar';
 import {Sidebar} from '@/components/Sidebar/Sidebar';
-import {ChatFolder, Conversation, KeyConfiguration, KeyValuePair, Message, ModelType,} from '@/types';
 import {cleanConversationHistory, cleanSelectedConversation,} from '@/utils/app/clean';
 import {DEFAULT_SYSTEM_PROMPT} from '@/utils/app/const';
 import {saveConversation, saveConversations, updateConversation,} from '@/utils/app/conversation';
@@ -14,6 +13,9 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import {useEffect, useRef, useState} from 'react';
 import {KeySettingsAlertDialog} from "@/components/Sidebar/KeySettingsAlert";
+import {ChatFolder, KeyValuePair, Message, ModelType} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 interface HomeProps {
     serverSideApiKeyIsSet: boolean;

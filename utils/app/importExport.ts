@@ -1,4 +1,5 @@
-import { ChatFolder, Conversation } from '@/types';
+import {ChatFolder} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
 
 function currentDate() {
   const date = new Date();

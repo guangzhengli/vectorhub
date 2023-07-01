@@ -1,6 +1,6 @@
-import { Conversation } from '@/types';
 import { IconPlus } from '@tabler/icons-react';
 import { FC } from 'react';
+import {Conversation} from "@/types/conversation";
 
 interface Props {
   selectedConversation: Conversation;

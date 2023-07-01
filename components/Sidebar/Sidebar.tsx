@@ -1,4 +1,3 @@
-import {ChatFolder, Conversation, KeyConfiguration, KeyValuePair} from '@/types';
 import {IconArrowBarLeft, IconFolderPlus, IconMessagesOff, IconPlus,} from '@tabler/icons-react';
 import {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'next-i18next';
@@ -7,6 +6,9 @@ import {Folders} from './Folders';
 import {Search} from './Search';
 import {SidebarSettings} from './SidebarSettings';
 import {Profile} from "@/components/Sidebar/Profile";
+import {Conversation} from "@/types/conversation";
+import {ChatFolder, KeyValuePair} from "@/types/chat";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 interface Props {
   loading: boolean;

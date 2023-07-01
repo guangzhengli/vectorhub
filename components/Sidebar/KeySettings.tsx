@@ -6,7 +6,8 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
 import {Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select"
-import {KeyConfiguration, ModelType} from '@/types';
+import {ModelType} from "@/types/chat";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 interface Props {
     keyConfiguration: KeyConfiguration;

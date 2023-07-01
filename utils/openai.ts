@@ -1,7 +1,8 @@
-import { KeyConfiguration, ModelType } from "@/types";
 import { OpenAIChat } from "langchain/llms/openai";
 import {CallbackManager} from "langchain/callbacks";
 import {NextApiResponse} from "next";
+import {ModelType} from "@/types/chat";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 export const getModel = async (keyConfiguration: KeyConfiguration, res: NextApiResponse) => {
     if (keyConfiguration.apiType === ModelType.AZURE_OPENAI) {

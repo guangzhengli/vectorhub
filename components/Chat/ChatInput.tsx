@@ -1,4 +1,3 @@
-import {Message} from '@/types';
 import {IconPlayerStop, IconRepeat, IconSend} from '@tabler/icons-react';
 import {
   FC,
@@ -8,6 +7,7 @@ import {
   useState,
 } from 'react';
 import {useTranslation} from 'next-i18next';
+import {Message} from "@/types/chat";
 
 interface Props {
   messageIsStreaming: boolean;

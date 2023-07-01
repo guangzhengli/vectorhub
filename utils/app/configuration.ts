@@ -1,4 +1,3 @@
-import {KeyConfiguration, ModelType} from "@/types";
 import {NextApiRequest} from "next";
 import {
     AZURE_OPENAI_API_DEPLOYMENT_NAME,
@@ -10,6 +9,8 @@ import {
     OPENAI_API_MODEL,
     OPENAI_TYPE
 } from "./const";
+import {KeyConfiguration} from "@/types/keyConfiguration";
+import {ModelType} from "@/types/chat";
 
 export const getKeyConfiguration = (req: NextApiRequest): KeyConfiguration => {
     if (!OPENAI_TYPE) {

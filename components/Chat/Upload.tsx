@@ -1,8 +1,9 @@
-import {KeyConfiguration, LlamaIndex} from "@/types";
 import {CHAT_FILES_MAX_SIZE} from "@/utils/app/const";
 import {humanFileSize} from "@/utils/app/files";
 import {useTranslation} from 'next-i18next';
 import {v4 as uuidv4} from 'uuid';
+import {LlamaIndex} from "@/types/llamaIndex";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 interface Props {
     onIndexChange: (index: LlamaIndex) => void;

@@ -1,5 +1,4 @@
-import {KeyConfiguration} from "@/types";
-import {FC, useState} from "react";
+import {FC} from "react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -9,7 +8,6 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
 interface Props {

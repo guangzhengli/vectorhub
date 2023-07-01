@@ -1,5 +1,6 @@
-import { KeyConfiguration, ModelType } from "@/types";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import {ModelType} from "@/types/chat";
+import {KeyConfiguration} from "@/types/keyConfiguration";
+import {OpenAIEmbeddings} from "langchain/embeddings/openai";
 
 export const getEmbeddings = async (keyConfiguration: KeyConfiguration) => {
     if (keyConfiguration.apiType === ModelType.AZURE_OPENAI) {

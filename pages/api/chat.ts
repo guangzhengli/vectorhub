@@ -1,4 +1,3 @@
-import {ChatBody} from '@/types';
 // @ts-expect-error
 import wasm from '../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module';
 import {getKeyConfiguration} from "@/utils/app/configuration";
@@ -8,6 +7,7 @@ import {getChatModel} from "@/utils/openai";
 import {ChatPromptTemplate, HumanMessagePromptTemplate} from "langchain/prompts";
 import {BufferMemory, ChatMessageHistory} from "langchain/memory";
 import {LLMChain} from "langchain/chains";
+import {ChatBody} from "@/types/chat";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

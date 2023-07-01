@@ -1,5 +1,5 @@
-import {Conversation} from '@/types';
 import {DEFAULT_SYSTEM_PROMPT} from './const';
+import {Conversation} from "@/types/conversation";
 
 export const cleanSelectedConversation = (conversation: Conversation) => {
   let updatedConversation = conversation;

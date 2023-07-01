@@ -1,6 +1,7 @@
-import { Conversation, KeyValuePair } from '@/types';
-import { FC } from 'react';
-import { ConversationComponent } from './Conversation';
+import {FC} from 'react';
+import {ConversationComponent} from './Conversation';
+import {KeyValuePair} from "@/types/chat";
+import {Conversation} from "@/types/conversation";
 
 interface Props {
   loading: boolean;

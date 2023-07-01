@@ -1,4 +1,4 @@
-import { Conversation } from '@/types';
+import { Conversation } from '@/types/conversation';
 import { DEFAULT_SYSTEM_PROMPT } from '@/utils/app/const';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'next-i18next';
