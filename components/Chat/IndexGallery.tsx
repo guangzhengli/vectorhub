@@ -5,12 +5,18 @@ import {Tabs, TabsContent, TabsList, TabsTrigger,} from "../ui/tabs";
 import {Button} from "../ui/button";
 import {ArrowBigDownDash} from "lucide-react";
 import {Index} from "@/types/database";
+import {FormDialog} from "@/components/Index/FormDialog";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 
 interface Props {
-
+  keyConfiguration: KeyConfiguration;
+  handleKeyConfigurationValidation: () => boolean;
 }
 
-export const IndexGallery: FC<Props> = () => {
+export const IndexGallery = ({
+  keyConfiguration,
+  handleKeyConfigurationValidation
+}: Props) => {
   const {data: session, status} = useSession();
   const [page, setPage] = useState(1);
   const [indexes, setIndexes] = useState<Index[]>([])
@@ -25,7 +31,7 @@ export const IndexGallery: FC<Props> = () => {
     };
     fetchAllIndexes();
   }, [page]);
-  
+
   useEffect(() => {
     const fetchUserIndexes = async () => {
       const response = await fetch(`/api/index/user/${session?.user?.id}`)
@@ -62,15 +68,19 @@ export const IndexGallery: FC<Props> = () => {
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {userIndexes.map((index) => (
-                <IndexCard key={index.id} index={index} />
+                <IndexCard key={index.id} index={index}/>
               ))}
+              <FormDialog keyConfiguration={keyConfiguration}
+                          handleKeyConfigurationValidation={handleKeyConfigurationValidation}/>
             </div>
           </TabsContent>
           <TabsContent value="likeed" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {userLikedIndexes.map((index) => (
-                <IndexCard key={index.id} index={index} />
+                <IndexCard key={index.id} index={index}/>
               ))}
+              <FormDialog keyConfiguration={keyConfiguration}
+                          handleKeyConfigurationValidation={handleKeyConfigurationValidation}/>
             </div>
           </TabsContent>
         </Tabs>
@@ -79,11 +89,11 @@ export const IndexGallery: FC<Props> = () => {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {indexes.map((index) => (
-            <IndexCard key={index.id} index={index} />
+            <IndexCard key={index.id} index={index}/>
           ))}
         </div>
         <Button onClick={handleLoadMore}>
-            <ArrowBigDownDash className="mr-2 h-4 w-4" /> Load More
+          <ArrowBigDownDash className="mr-2 h-4 w-4"/> Load More
         </Button>
       </div>
     </>

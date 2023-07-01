@@ -11,6 +11,7 @@ import {humanFileSize} from "@/utils/app/files";
 import {KeyValuePair, Message} from "@/types/chat";
 import {Conversation} from "@/types/conversation";
 import {KeyConfiguration} from "@/types/keyConfiguration";
+import {IndexGallery} from "@/components/Chat/IndexGallery";
 
 interface Props {
   conversation: Conversation;
@@ -146,41 +147,8 @@ export const Chat: FC<Props> = memo(
                   </>
                 ) : undefined}
 
-                <div className="mx-auto flex w-[350px] flex-col space-y-10 pt-12 sm:w-[600px]">
-                  <div
-                    className="flex h-full flex-col space-y-4 rounded border border-neutral-200 p-4 dark:border-neutral-600">
-                    <Upload onIndexChange={(index) =>
-                      onUpdateConversation(conversation, {
-                        key: 'index',
-                        value: index,
-                      })}
-                            keyConfiguration={keyConfiguration}
-                            handleIsUploading={handleIsUploading}
-                            handleIsUploadSuccess={handleIsUploadSuccess}
-                            handleUploadError={handleUploadError}
-                            handleKeyConfigurationValidation={handleKeyConfigurationValidation}
-                    />
-                    {CHAT_FILES_MAX_SIZE != 0 &&
-                        <>
-                            <p className="mt-2 px-8 text-xs text-gray-500 dark:text-gray-400">This
-                                environment is only for trial and supports a maximum file size
-                                of {humanFileSize(CHAT_FILES_MAX_SIZE)}.</p>
-                            <p className="mt-2 px-8 text-xs text-gray-500 dark:text-gray-400">Here
-                                are some good starting questions:
-                                <a className="text-xs text-gray-500 dark:text-gray-400 underline"
-                                   href="https://github.com/guangzhengli/ChatFiles/blob/main/doc/Example.md"> Good
-                                    Examples .</a>
-                            </p>
-                            <p className="mt-2 px-8 text-xs text-gray-500 dark:text-gray-400">If
-                                you need to upload larger files, please deploy your own
-                                chatfiles by:
-                                <a className="text-xs text-gray-500 dark:text-gray-400 underline"
-                                   href="https://github.com/guangzhengli/ChatFiles"> ChatFiles</a>
-                            </p>
-                        </>
-                    }
-                  </div>
-                </div>
+                <IndexGallery keyConfiguration={keyConfiguration} handleKeyConfigurationValidation={handleKeyConfigurationValidation} />
+
                 {isUploading ? (
                   <>
                     <div role="status"
