@@ -57,6 +57,7 @@ export interface Index {
   prompt?: string;
   tags?: string[];
   questions?: string[];
+  likes?: bigint;
   published: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -71,4 +72,5 @@ export interface User {
   emailVerified?: Date;
   image?: string;
   indexes?: Index[];
+  likedIndexIds?: string[];
 }
