@@ -1,4 +1,15 @@
 -- CreateTable
+CREATE TABLE "Document" (
+    "id" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "namespace" TEXT DEFAULT 'default',
+    "indexId" TEXT NOT NULL,
+    "vector" vector,
+
+    CONSTRAINT "Document_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Index" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -6,6 +17,7 @@ CREATE TABLE "Index" (
     "prompt" TEXT,
     "tags" TEXT[],
     "questions" TEXT[],
+    "likes" BIGINT NOT NULL DEFAULT 0,
     "published" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -51,6 +63,7 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
+    "likedIndexIds" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -79,6 +92,9 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
+
+-- AddForeignKey
+ALTER TABLE "Document" ADD CONSTRAINT "Document_indexId_fkey" FOREIGN KEY ("indexId") REFERENCES "Index"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Index" ADD CONSTRAINT "Index_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

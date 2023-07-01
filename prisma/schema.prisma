@@ -24,6 +24,7 @@ model Index {
   prompt      String?
   tags        String[]
   questions   String[]
+  likes       BigInt     @default(0)
   published   Boolean    @default(true)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
@@ -68,6 +69,7 @@ model User {
   emailVerified DateTime?
   image         String?
   indexes       Index[]
+  likedIndexIds String[]
   accounts      Account[]
   sessions      Session[]
 }
