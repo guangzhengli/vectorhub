@@ -4,9 +4,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
-import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
+import {useState} from "react";
+import {AlertCircle} from "lucide-react";
 
 const indexFormSchema = z.object({
   name: z
@@ -56,7 +58,13 @@ const indexFormSchema = z.object({
 
 type IndexFormValues = z.infer<typeof indexFormSchema>
 
-export const IndexForm = () => {
+interface Props {
+  indexId: string
+}
+
+export const IndexForm = ({ indexId } : Props) => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
   const form = useForm<IndexFormValues>({
     resolver: zodResolver(indexFormSchema),
     mode: "onChange",
@@ -72,8 +80,33 @@ export const IndexForm = () => {
     control: form.control,
   })
 
-  function onSubmit(data: IndexFormValues) {
-    // onSummit
+  async function onSubmit(data: IndexFormValues) {
+    if (indexId === '') {
+      setErrorMessage('Index ID is missing, please refresh the page and try again.')
+    }
+
+    await fetch('/api/indexes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: indexId,
+        name: data.name,
+        description: data.description,
+        prompt: data.prompt,
+        tags: data.tags?.map((tag) => tag.value),
+        questions: data.questions?.map((question) => question.value),
+        published: data.published,
+        likes: 0,
+      })
+    }).then(async (res) => {
+      if (!res.ok) {
+        const message = await res.text();
+        console.log('save embedding failed: ', message);
+        setErrorMessage(message)
+      }
+    });
   }
 
   return (
@@ -106,7 +139,7 @@ export const IndexForm = () => {
                   <Input className="max-w-2xl" placeholder="This is a index for..." {...field} />
                 </FormControl>
                 <FormDescription>
-                  Please enter some description information as this is the public index description. This will help other users better understand how to use it.
+                  Description will help other users better understand how to use it.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -205,18 +238,27 @@ export const IndexForm = () => {
                 <FormControl>
                   <Checkbox
                     className="ml-2"
+                    defaultChecked={true}
                     checked={field.value}
                     onCheckedChange={() => field.onChange}
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
                   <FormDescription>
-                    Please confirm whether to publish publicly. If you choose not to publish publicly, the system will delete this data regularly.
+                    Please confirm whether publicly. If you choose not publicly, the system will delete this data regularly.
                   </FormDescription>
                 </div>
               </FormItem>
             )}
           />
+          {errorMessage && (
+            <Alert className="max-w-md ml-16" variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                Create index failed: {errorMessage}
+              </AlertDescription>
+            </Alert>)}
           <Button type="submit" className="text-center">Create new index</Button>
         </form>
       </Form>

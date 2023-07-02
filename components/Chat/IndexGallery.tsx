@@ -1,13 +1,11 @@
-import {FC, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {IndexCard} from "./IndexCard";
 import {useSession} from "next-auth/react";
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "../ui/tabs";
 import {Button} from "../ui/button";
 import {ArrowBigDownDash} from "lucide-react";
-import {IndexFormTabs} from "@/components/Chat/IndexFormTabs";
 import {KeyConfiguration} from "@/types/keyConfiguration";
-import Link from "next/link";
-import {Index} from "@/types";
+import {Index} from "@/types/index";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
@@ -28,7 +26,7 @@ export const IndexGallery = ({
 
   useEffect(() => {
     const fetchAllIndexes = async () => {
-      const response = await fetch(`/api/index`)
+      const response = await fetch(`/api/indexes`)
       const data = await response.json();
       setIndexes([...indexes, ...data]);
     };
@@ -37,7 +35,7 @@ export const IndexGallery = ({
 
   useEffect(() => {
     const fetchUserIndexes = async () => {
-      const response = await fetch(`/api/index/user/${session?.user?.id}`)
+      const response = await fetch(`/api/indexes/user/${session?.user?.id}`)
       const data = await response.json();
       setUserIndexes(data);
     };
@@ -46,7 +44,7 @@ export const IndexGallery = ({
 
   useEffect(() => {
     const fetchUserLikedIndexes = async () => {
-      const response = await fetch(`/api/index/user/${session?.user?.id}/likes`)
+      const response = await fetch(`/api/indexes/user/${session?.user?.id}/likes`)
       const data = await response.json();
       setUserLikedIndexes(data);
     };

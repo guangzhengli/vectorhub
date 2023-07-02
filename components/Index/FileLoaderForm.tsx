@@ -27,7 +27,7 @@ export const FileLoaderForm = ({
   const [isUploadSuccess, setIsUploadSuccess] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
-  const [uploadFileIndexId, setUploadFileIndexId] = useState<string | null>(null);
+  const [uploadFileIndexId, setUploadFileIndexId] = useState<string>('');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -53,6 +53,7 @@ export const FileLoaderForm = ({
         await uploadFile(file, indexId, fileType);
         await saveEmbeddings(indexId, fileType);
 
+        setUploadFileIndexId(indexId);
         setIsUploading(false);
         setFileName(file.name)
         setIsUploadSuccess(true)
@@ -189,7 +190,7 @@ export const FileLoaderForm = ({
             </>
           )
         }
-        <IndexForm />
+        <IndexForm indexId={uploadFileIndexId}/>
       </div>
     </>
   )
