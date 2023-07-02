@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 
-export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { page } = req.query;
     const pageSize = 20;
     const skip = page ? (Number(page) - 1) * pageSize : 0;
@@ -30,3 +30,5 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(indexes);
 }
+
+export default handler;

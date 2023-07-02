@@ -1,8 +1,8 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
-import {getExistingVectorStore} from "@/utils/vector";
 import {getModel} from "@/utils/openai";
 import {loadQAStuffChain} from "langchain/chains";
 import { getKeyConfiguration } from '@/utils/app/configuration';
+import {getVectorStore} from "@/utils/vector";
 
 export const config = {
     api: {
@@ -15,12 +15,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const keyConfiguration = getKeyConfiguration(req);
 
     const message: string = req.query.message as string;
-    const indexName: string = req.query.indexName as string;
+    const indexId: string = req.query.indexId as string;
 
-    console.log("handler chatfile query: ", message, indexName);
-    const vectorStore = await getExistingVectorStore(keyConfiguration, indexName);
+    console.log("handler chatfile query: ", message, indexId);
+    const vectorStore = await getVectorStore(keyConfiguration);
 
-    const documents = await vectorStore.similaritySearch(message, 2);
+    const documents = await vectorStore.similaritySearchWithScore(message, 2,
+        { indexId: { equals: indexId }}
+    );
     const llm = await getModel(keyConfiguration, res);
     const stuffChain = loadQAStuffChain(llm);
 

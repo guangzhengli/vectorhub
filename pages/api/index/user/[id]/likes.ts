@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 
-export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { id } = req.query;
 
     const user = await prisma?.user.findUnique({
@@ -31,3 +31,5 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(indexes);
 }
+
+export default handler;
