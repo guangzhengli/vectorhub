@@ -1,9 +1,10 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {getDocumentLoader} from "@/utils/langchain/documentLoader";
 import {getSplitterDocument} from "@/utils/langchain/splitter";
-import {saveEmbeddings} from "@/utils/vector";
 import {NEXT_PUBLIC_CHAT_FILES_UPLOAD_PATH} from "@/utils/app/const";
 import { getKeyConfiguration } from '@/utils/app/configuration';
+import {getVectorStore} from "@/utils/vector";
+import { PrismaClient } from '@prisma/client';
 
 const folderPath = NEXT_PUBLIC_CHAT_FILES_UPLOAD_PATH;
 
@@ -11,15 +12,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log("beginning embedding handler");
     const keyConfiguration = getKeyConfiguration(req);
 
-    const { fileName, fileType } = req.body;
-    const loader = getDocumentLoader(fileType, `${folderPath}/${fileName}.${fileType}`);
+    const { indexId, fileType } = req.body;
+    const loader = getDocumentLoader(fileType, `${folderPath}/${indexId}.${fileType}`);
     const document = await loader.load();
     const splitDocuments = await getSplitterDocument(keyConfiguration, document);
-    splitDocuments.map((doc) => {
-        doc.metadata = { file_name : fileName };
-    });
+    const vectorStore = await getVectorStore(keyConfiguration);
     try {
-        await saveEmbeddings(keyConfiguration, splitDocuments);
+        const db = new PrismaClient();
+        await vectorStore.addModels(
+          await db.$transaction(
+            splitDocuments.map((doc) => db.document.create({ data: { content: doc.pageContent, indexId: indexId }})))
+        );
         res.status(200).json({ message: 'save supabase embedding successes' });
     } catch (e) {
         console.error(e);

@@ -1,7 +1,8 @@
 import {FC} from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import {Users} from "lucide-react";
-import {Index} from "@/types/database";
+
+import {Index} from "@/types";
 
 interface Props {
   index: Index

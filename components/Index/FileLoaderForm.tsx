@@ -1,21 +1,16 @@
-import {zodResolver} from "@hookform/resolvers/zod"
-import {useFieldArray, useForm} from "react-hook-form"
-import * as z from "zod"
 import {v4 as uuidv4} from 'uuid';
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "../ui/form";
-import {Input} from "../ui/input";
-import {Textarea} from "@/components/ui/textarea";
-import {cn} from "@/lib/utils";
-import {Button} from "@/components/ui/button";
-import {Checkbox} from "@/components/ui/checkbox";
-import { Label } from "../ui/label";
-import { useState } from "react";
-import { Progress } from "../ui/progress";
-import { humanFileSize } from "@/utils/app/files";
-import { CHAT_FILES_MAX_SIZE } from "@/utils/app/const";
-import { KeyConfiguration } from "@/types/keyConfiguration";
+import {Label} from "../ui/label";
+import {useEffect, useState} from "react";
+import {Progress} from "../ui/progress";
+import {humanFileSize} from "@/utils/app/files";
+import {CHAT_FILES_MAX_SIZE} from "@/utils/app/const";
+import {KeyConfiguration} from "@/types/keyConfiguration";
 import {IndexForm} from "@/components/Index/IndexForm";
-
+import {Input} from "@/components/ui/input";
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
+import {AlertCircle, CheckCheck} from "lucide-react";
+import { Prisma } from '@prisma/client';
+import { createId } from '@paralleldrive/cuid2';
 
 
 interface Props {
@@ -27,12 +22,19 @@ export const FileLoaderForm = ({
   keyConfiguration,
   handleKeyConfigurationValidation,
 }: Props) => {
-  const [file, setFile] = useState<File | null>(null)
+  const [fileName, setFileName] = useState<string | null>(null)
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [isUploadSuccess, setIsUploadSuccess] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploadFileIndexId, setUploadFileIndexId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUploadProgress(progress => (progress + 1) % 101)
+    }, 50)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleFile = async (file: File) => {
     if (!handleKeyConfigurationValidation()) {
@@ -44,11 +46,15 @@ export const FileLoaderForm = ({
     }
 
     setIsUploading(true);
-
     try {
-        await uploadFile(file);
+        const indexId = createId();
+        const fileType = file.name.split('.').pop()!;
+
+        await uploadFile(file, indexId, fileType);
+        await saveEmbeddings(indexId, fileType);
 
         setIsUploading(false);
+        setFileName(file.name)
         setIsUploadSuccess(true)
     } catch (e) {
         console.error(e);
@@ -93,30 +99,23 @@ export const FileLoaderForm = ({
         }
     }
 
-    const uploadFile = async (file: File) => {
-      const fileName = uuidv4();
-      const fileType = file.name.split('.').pop()!;
+    const uploadFile = async (file: File, indexId: string, fileType: string) => {
 
       const formData = new FormData();
       formData.append("file", file);
 
-      await fetch(`/api/files?fileName=${fileName}.${fileType}`, {
+      await fetch(`/api/files?fileName=${indexId}.${fileType}`, {
           method: 'POST',
           body: formData
       }).then(res => {
           if (!res.ok) {
-              console.log("save file failed:", fileName);
-              throw new Error(`save file failed:, ${fileName}`);
+              console.log("save file failed:", indexId);
+              throw new Error(`save file failed:, ${indexId}`);
           }
-      }).then(async (data: any) => {
-          console.log("save file success:", fileName);
-          setUploadProgress(50);
-          await saveEmbeddings(fileName, fileType);
-          setUploadProgress(100);
       });
   }
 
-  const saveEmbeddings = async (fileName: string, fileType: string) => {
+  const saveEmbeddings = async (indexId: string, fileType: string) => {
     await fetch('/api/embedding', {
         method: 'POST',
         headers: {
@@ -131,7 +130,7 @@ export const FileLoaderForm = ({
             'x-azure-embedding-deployment-name': keyConfiguration.azureEmbeddingDeploymentName ?? '',
         },
         body: JSON.stringify({
-            fileName: fileName,
+            indexId: indexId,
             fileType: fileType,
         })
     }).then(async (res) => {
@@ -145,16 +144,53 @@ export const FileLoaderForm = ({
 
   return (
     <>
-    (isUploading ? (
-        <Progress value={uploadProgress} className="w-[60%]" />
-      ) : (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="file">Upload File</Label>
-          <Input id="file" type="file" onChange={() => handleFile}/>
-        </div>
-      )
-    )
-    <IndexForm />
+      <div className="space-x-16">
+        { isUploadSuccess ? (
+          <>
+            <Alert className="max-w-md ml-16 border-green-500">
+              <CheckCheck className="h-4 w-4" />
+              <AlertTitle>Upload success!</AlertTitle>
+              <AlertDescription>
+                File {fileName} has been uploaded successfully.
+              </AlertDescription>
+            </Alert>
+          </>
+        ) :
+          (
+            <>
+              { isUploading ? (
+                <>
+                  <Progress value={uploadProgress} className="w-[60%] ml-16" />
+                </>
+              ) : (
+                <>
+                  { uploadError ? (
+                    <>
+                      <Alert className="max-w-md ml-16" variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>
+                          Upload failed: {uploadError}
+                        </AlertDescription>
+                      </Alert>
+                    </>
+                  ) : (
+                    <div className="max-w-sm space-x-16">
+                      <Label className="ml-16" htmlFor="index">Choose a file to upload</Label>
+                      <Input id="index" type="file" className="h-14 mt-2" onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          handleFile(e.target.files[0]).then(r => console.log("upload file success"));
+                        }}}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+            </>
+          )
+        }
+        <IndexForm />
+      </div>
     </>
   )
 }

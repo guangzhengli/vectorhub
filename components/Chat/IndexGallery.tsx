@@ -4,19 +4,22 @@ import {useSession} from "next-auth/react";
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "../ui/tabs";
 import {Button} from "../ui/button";
 import {ArrowBigDownDash} from "lucide-react";
-import {Index} from "@/types/database";
-import {FormDialog} from "@/components/Index/FormDialog";
+import {IndexFormTabs} from "@/components/Chat/IndexFormTabs";
 import {KeyConfiguration} from "@/types/keyConfiguration";
+import Link from "next/link";
+import {Index} from "@/types";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
   handleKeyConfigurationValidation: () => boolean;
+  handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
 }
 
 export const IndexGallery = ({
-  keyConfiguration,
-  handleKeyConfigurationValidation
-}: Props) => {
+                               keyConfiguration,
+                               handleKeyConfigurationValidation,
+                               handleShowIndexFormTabs,
+                             }: Props) => {
   const {data: session, status} = useSession();
   const [page, setPage] = useState(1);
   const [indexes, setIndexes] = useState<Index[]>([])
@@ -65,13 +68,14 @@ export const IndexGallery = ({
             <TabsTrigger value="created">Created</TabsTrigger>
             <TabsTrigger value="likeed">Liked</TabsTrigger>
           </TabsList>
-          <TabsContent value="overview" className="space-y-4">
+          <TabsContent value="created" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {userIndexes.map((index) => (
                 <IndexCard key={index.id} index={index}/>
               ))}
-              <FormDialog keyConfiguration={keyConfiguration}
-                          handleKeyConfigurationValidation={handleKeyConfigurationValidation}/>
+              <Button onClick={() => handleShowIndexFormTabs(true)}>
+                <ArrowBigDownDash className="mr-2 h-4 w-4"/> Create new index
+              </Button>
             </div>
           </TabsContent>
           <TabsContent value="likeed" className="space-y-4">
@@ -79,8 +83,9 @@ export const IndexGallery = ({
               {userLikedIndexes.map((index) => (
                 <IndexCard key={index.id} index={index}/>
               ))}
-              <FormDialog keyConfiguration={keyConfiguration}
-                          handleKeyConfigurationValidation={handleKeyConfigurationValidation}/>
+              <Button onClick={() => handleShowIndexFormTabs(true)}>
+                <ArrowBigDownDash className="mr-2 h-4 w-4"/> Create new index
+              </Button>
             </div>
           </TabsContent>
         </Tabs>

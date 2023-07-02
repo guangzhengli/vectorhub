@@ -79,15 +79,15 @@ export const IndexForm = () => {
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Index name" {...field} />
+                  <Input className="max-w-sm" placeholder="Index name" {...field} />
                 </FormControl>
                 <FormDescription>
                   This is index public display name.
@@ -101,9 +101,9 @@ export const IndexForm = () => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Input placeholder="This is a index for..." {...field} />
+                  <Input className="max-w-2xl" placeholder="This is a index for..." {...field} />
                 </FormControl>
                 <FormDescription>
                   Please enter some description information as this is the public index description. This will help other users better understand how to use it.
@@ -121,7 +121,7 @@ export const IndexForm = () => {
                 <FormControl>
                   <Textarea
                     placeholder="This is the user prompt for the index."
-                    className="resize-none"
+                    className="resize-none max-w-2xl"
                     {...field}
                   />
                 </FormControl>
@@ -133,6 +133,12 @@ export const IndexForm = () => {
             )}
           />
           <div>
+            <FormLabel>
+              Tags
+            </FormLabel>
+            <FormDescription className="mt-2">
+              Add relevant tags to your index so that users can quickly discover it.
+            </FormDescription>
             {tags.map((tag: any, index: any) => (
               <FormField
                 control={form.control}
@@ -140,14 +146,8 @@ export const IndexForm = () => {
                 name={`tags.${index}.value`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className={cn(index !== 0 && "sr-only")}>
-                      URLs
-                    </FormLabel>
-                    <FormDescription className={cn(index !== 0 && "sr-only")}>
-                      Add links to your website, blog, or social media profiles.
-                    </FormDescription>
                     <FormControl>
-                      <Input {...tag} />
+                      <Input className="max-w-sm my-2" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -165,6 +165,12 @@ export const IndexForm = () => {
             </Button>
           </div>
           <div>
+            <FormLabel>
+              Good Questions
+            </FormLabel>
+            <FormDescription className="mt-2">
+              Add the well-prepared questions to your index so that users can quickly learn how to use it.
+            </FormDescription>
             {questions.map((question: any, index: any) => (
               <FormField
                 control={form.control}
@@ -172,14 +178,8 @@ export const IndexForm = () => {
                 name={`questions.${index}.value`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className={cn(index !== 0 && "sr-only")}>
-                      Good Questions
-                    </FormLabel>
-                    <FormDescription className={cn(index !== 0 && "sr-only")}>
-                      Add links to your website, blog, or social media profiles.
-                    </FormDescription>
                     <FormControl>
-                      <Input {...field} />
+                      <Input className="max-w-4xl my-2" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -204,14 +204,12 @@ export const IndexForm = () => {
                 <FormLabel>Publicly</FormLabel>
                 <FormControl>
                   <Checkbox
+                    className="ml-2"
                     checked={field.value}
                     onCheckedChange={() => field.onChange}
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>
-                    Publicly ?
-                  </FormLabel>
                   <FormDescription>
                     Please confirm whether to publish publicly. If you choose not to publish publicly, the system will delete this data regularly.
                   </FormDescription>
@@ -219,7 +217,7 @@ export const IndexForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Update profile</Button>
+          <Button type="submit" className="text-center">Create new index</Button>
         </form>
       </Form>
     </div>

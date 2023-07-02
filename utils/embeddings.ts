@@ -2,7 +2,7 @@ import {ModelType} from "@/types/chat";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {OpenAIEmbeddings} from "langchain/embeddings/openai";
 
-export const getEmbeddings = async (keyConfiguration: KeyConfiguration) => {
+export const getEmbeddings = (keyConfiguration: KeyConfiguration) => {
     if (keyConfiguration.apiType === ModelType.AZURE_OPENAI) {
         return new OpenAIEmbeddings({
             azureOpenAIApiKey: keyConfiguration.azureApiKey,

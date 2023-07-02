@@ -1,12 +1,4 @@
-export interface Database {
-  id: string;
-  name?: string;
-  email?: string;
-  emailVerified?: Date;
-  image?: string;
-  indexes?: Index[];
-  likedIndexIds?: string[];
-}
+import {User} from "@/types/user";
 
 export interface Index {
   id: string;
@@ -20,5 +12,5 @@ export interface Index {
   createdAt: Date;
   updatedAt: Date;
   authorId?: string;
-  author?: Database;
+  author?: User;
 }
