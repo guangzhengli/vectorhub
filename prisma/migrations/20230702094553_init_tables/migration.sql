@@ -79,6 +79,9 @@ CREATE TABLE "VerificationToken" (
 );
 
 -- CreateIndex
+CREATE INDEX "Document_indexId_idx" ON "Document"("indexId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_provider_account_id_key" ON "Account"("provider", "provider_account_id");
 
 -- CreateIndex
@@ -92,9 +95,6 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
-
--- AddForeignKey
-ALTER TABLE "Document" ADD CONSTRAINT "Document_indexId_fkey" FOREIGN KEY ("indexId") REFERENCES "Index"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Index" ADD CONSTRAINT "Index_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -1,6 +1,6 @@
 datasource db {
   provider  = "postgresql"
-  url       = env("SUPABASE_CONNECTION_STRING")
+  url       = env("DATABASE_URL")
   directUrl = env("PRIMSA_MIGRATION_CONNECTION_STRING")
 }
 
@@ -12,9 +12,10 @@ model Document {
   id        String                 @id @default(cuid())
   content   String
   namespace String?                @default("default")
-  index     Index                  @relation(fields: [indexId], references: [id])
   indexId   String
   vector    Unsupported("vector")?
+
+  @@index([indexId])
 }
 
 model Index {
@@ -30,7 +31,6 @@ model Index {
   updatedAt   DateTime   @updatedAt
   author      User?      @relation(fields: [authorId], references: [id])
   authorId    String?
-  Documents   Document[]
 }
 
 model Account {
