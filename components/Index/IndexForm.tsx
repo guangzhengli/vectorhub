@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 import {useState} from "react";
-import {AlertCircle} from "lucide-react";
+import {AlertCircle, Loader2} from "lucide-react";
 
 const indexFormSchema = z.object({
   name: z
@@ -65,6 +65,7 @@ interface Props {
 
 export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const form = useForm<IndexFormValues>({
     resolver: zodResolver(indexFormSchema),
@@ -86,6 +87,8 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
       setErrorMessage('Index ID is missing, please refresh the page and try again.')
     }
 
+    setIsSubmitting(true)
+
     await fetch('/api/indexes', {
       method: 'POST',
       headers: {
@@ -102,6 +105,7 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
         likes: 0,
       })
     }).then(async (res) => {
+      setIsSubmitting(false)
       if (!res.ok) {
         const message = await res.text();
         console.log('save embedding failed: ', message);
@@ -261,7 +265,13 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
               </AlertDescription>
             </Alert>)}
           <div className="pb-4">
-            <Button type="submit">Create new index</Button>
+            <>
+              {isSubmitting
+              ? <Button disabled><Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</Button>
+              : <Button type="submit">Create new index</Button>
+              }
+            </>
+
             <Button variant="secondary" className="ml-8" onClick={() => handleShowIndexFormTabs(false)}>Cancel</Button>
           </div>
         </form>

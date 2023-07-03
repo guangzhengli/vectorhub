@@ -6,18 +6,22 @@ import {Button} from "../ui/button";
 import {ArrowBigDownDash} from "lucide-react";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {Index} from "@/types/index";
+import {LlamaIndex} from "@/types/llamaIndex";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
   handleKeyConfigurationValidation: () => boolean;
   handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
+  onIndexChange: (index: LlamaIndex) => void;
 }
 
-export const IndexGallery = ({
-                               keyConfiguration,
-                               handleKeyConfigurationValidation,
-                               handleShowIndexFormTabs,
-                             }: Props) => {
+export const IndexGallery = (
+  {
+    keyConfiguration,
+    handleKeyConfigurationValidation,
+    handleShowIndexFormTabs,
+    onIndexChange
+  }: Props) => {
   const {data: session, status} = useSession();
   const [page, setPage] = useState(1);
   const [indexes, setIndexes] = useState<Index[]>([])
@@ -69,7 +73,7 @@ export const IndexGallery = ({
           <TabsContent value="created" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {userIndexes.map((index) => (
-                <IndexCard key={index.id} index={index}/>
+                <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
               ))}
               <Button onClick={() => handleShowIndexFormTabs(true)}>
                 <ArrowBigDownDash className="mr-2 h-4 w-4"/> Create new index
@@ -79,7 +83,7 @@ export const IndexGallery = ({
           <TabsContent value="likeed" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {userLikedIndexes.map((index) => (
-                <IndexCard key={index.id} index={index}/>
+                <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
               ))}
               <Button onClick={() => handleShowIndexFormTabs(true)}>
                 <ArrowBigDownDash className="mr-2 h-4 w-4"/> Create new index
@@ -92,7 +96,7 @@ export const IndexGallery = ({
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {indexes.map((index) => (
-            <IndexCard key={index.id} index={index}/>
+            <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
           ))}
         </div>
         <Button onClick={handleLoadMore}>

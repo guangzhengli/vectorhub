@@ -50,7 +50,7 @@ export const getChatModel = async (keyConfiguration: KeyConfiguration, res: Next
 
 export const getCallbackManager = (res: NextApiResponse) => {
     return CallbackManager.fromHandlers({
-        handleLLMNewToken: async (token: string, runId: string, parentRunId?: string) =>{
+        handleLLMNewToken: async (token: string) =>{
             res.write(token);
         },
         handleLLMEnd: async () => {

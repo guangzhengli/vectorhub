@@ -128,7 +128,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
                 });
             } else {
                 response = await fetch(
-                    `/api/query?message=${message.content}&indexName=${updatedConversation.index.indexName}`, {
+                    `/api/query?message=${message.content}&indexId=${updatedConversation.index.indexId}`, {
                         method: 'GET',
                         headers: {
                             'x-api-type': keyConfiguration.apiType ?? '',
@@ -345,7 +345,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
             folderId: 0,
             index: {
                 indexName: '',
-                indexType: '',
+                indexId: '',
             },
         };
 
@@ -381,7 +381,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
                 folderId: 0,
                 index: {
                     indexName: '',
-                    indexType: '',
+                    indexId: '',
                 },
             });
             localStorage.removeItem('selectedConversation');
@@ -418,7 +418,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
             folderId: 0,
             index: {
                 indexName: '',
-                indexType: '',
+                indexId: '',
             },
         });
         localStorage.removeItem('selectedConversation');
@@ -514,7 +514,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
                 folderId: 0,
                 index: {
                     indexName: '',
-                    indexType: '',
+                    indexId: '',
                 },
             });
         }

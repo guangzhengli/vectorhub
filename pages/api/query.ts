@@ -28,10 +28,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
         stuffChain.call({
-            input_documents: documents,
+            input_documents: documents.map((doc) => doc[0]),
             question: message,
         }).catch(console.error);
-        // res.status(200).json({ responseMessage: chainValues.text.toString() });
     } catch (e) {
         console.log("error in handler: ", e);
         res.status(500).json({ errorMessage: (e as Error).toString() });

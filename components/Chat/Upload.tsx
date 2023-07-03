@@ -102,7 +102,6 @@ export const Upload = ({
         }).then(async (data: any) => {
             console.log("save file success:", fileName);
             await saveEmbeddings(fileName, fileType);
-            onIndexChange({indexName: fileName, indexType: fileType.split('.').pop()!});
         });
     }
 
@@ -131,17 +130,6 @@ export const Upload = ({
                 throw new Error(`save embedding failed: ' ${message}`);
             }
         });
-    }
-
-    const deleteFile = async (fileTempName: string) => {
-
-        await fetch(`/api/files?fileName=${fileTempName}`, {
-            method: 'DELETE'
-        }).then(res => res.json())
-            .then((data: any) => {
-                // onIndexChange({indexName: data.indexName, indexType: data.indexType});
-                console.log("import file index json name:", data);
-            });
     }
 
     return (
