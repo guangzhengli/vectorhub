@@ -116,7 +116,7 @@ export const Chat: FC<Props> = memo(
     return (
       <>
         { isShowIndexFormTabs ? (
-          <IndexFormTabs keyConfiguration={keyConfiguration} handleKeyConfigurationValidation={handleKeyConfigurationValidation} />
+          <IndexFormTabs keyConfiguration={keyConfiguration} handleKeyConfigurationValidation={handleKeyConfigurationValidation} handleShowIndexFormTabs={setIsShowIndexFormTabs} />
         ) : (
         <div className="overflow-none relative flex-1 bg-white dark:bg-[#343541]">
           <>

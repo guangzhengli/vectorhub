@@ -3,19 +3,23 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/comp
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {FileLoaderForm} from "@/components/Index/FileLoaderForm";
 import {KeyConfiguration} from "@/types/keyConfiguration";
+import {Button} from "@/components/ui/button";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
   handleKeyConfigurationValidation: () => boolean;
+  handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
 }
 
-export const IndexFormTabs = ({
-                       keyConfiguration,
-                       handleKeyConfigurationValidation,
-                     }: Props) => {
+export const IndexFormTabs = (
+  {
+    keyConfiguration,
+    handleKeyConfigurationValidation,
+    handleShowIndexFormTabs,
+  }: Props) => {
   return (
     <>
-      <Tabs defaultValue="FileLoader" className="w-full">
+      <Tabs defaultValue="fileloader" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="fileloader">FileLoader</TabsTrigger>
           <TabsTrigger value="webloader">WebLoader</TabsTrigger>
@@ -29,7 +33,8 @@ export const IndexFormTabs = ({
               </CardDescription>
             </CardHeader>
             <FileLoaderForm keyConfiguration={keyConfiguration}
-                            handleKeyConfigurationValidation={handleKeyConfigurationValidation}/>
+                            handleKeyConfigurationValidation={handleKeyConfigurationValidation}
+                            handleShowIndexFormTabs={handleShowIndexFormTabs} />
           </Card>
         </TabsContent>
         <TabsContent value="webloader">

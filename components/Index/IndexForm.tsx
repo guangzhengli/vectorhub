@@ -60,9 +60,10 @@ type IndexFormValues = z.infer<typeof indexFormSchema>
 
 interface Props {
   indexId: string
+  handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
 }
 
-export const IndexForm = ({ indexId } : Props) => {
+export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const form = useForm<IndexFormValues>({
@@ -259,7 +260,10 @@ export const IndexForm = ({ indexId } : Props) => {
                 Create index failed: {errorMessage}
               </AlertDescription>
             </Alert>)}
-          <Button type="submit" className="text-center">Create new index</Button>
+          <div className="pb-4">
+            <Button type="submit">Create new index</Button>
+            <Button variant="secondary" className="ml-8" onClick={() => handleShowIndexFormTabs(false)}>Cancel</Button>
+          </div>
         </form>
       </Form>
     </div>

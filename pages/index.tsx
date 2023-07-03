@@ -16,6 +16,7 @@ import {KeySettingsAlertDialog} from "@/components/Sidebar/KeySettingsAlert";
 import {ChatFolder, KeyValuePair, Message, ModelType} from "@/types/chat";
 import {Conversation} from "@/types/conversation";
 import {KeyConfiguration} from "@/types/keyConfiguration";
+import { getSession } from 'next-auth/react';
 
 interface HomeProps {
     serverSideApiKeyIsSet: boolean;
@@ -599,16 +600,25 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
 };
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({locale}) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession(context);
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/api/auth/signin',
+                permanent: false,
+            }
+        }
+    }
     return {
         props: {
             serverSideApiKeyIsSet: !!process.env.OPENAI_TYPE,
-            ...(await serverSideTranslations(locale ?? 'en', [
+            ...(await serverSideTranslations(context.locale ?? 'en', [
                 'common',
                 'chat',
                 'sidebar',
                 'markdown',
             ])),
-        },
+        }
     };
 };
