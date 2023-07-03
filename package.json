@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@types/cookie": "^0.5.1",
     "@types/formidable": "^2.0.5",
     "@types/node": "18.15.10",
     "@types/react": "18.0.30",
