@@ -61,7 +61,7 @@ export const IndexGallery = (
 
   return (
     <>
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-8 pt-6 pb-48">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">My created vector</h2>
         </div>
@@ -94,14 +94,16 @@ export const IndexGallery = (
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">Vector Hub</h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
           {indexes.map((index) => (
             <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
           ))}
         </div>
-        <Button onClick={handleLoadMore}>
-          <ArrowBigDownDash className="mr-2 h-4 w-4"/> Load More
-        </Button>
+        <div className="flex justify-center">
+          <Button variant="outline" onClick={handleLoadMore}>
+            <ArrowBigDownDash className="mr-2 h-4 w-4"/> Load More
+          </Button>
+        </div>
       </div>
     </>
   )
