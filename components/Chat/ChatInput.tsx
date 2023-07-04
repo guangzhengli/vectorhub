@@ -116,15 +116,16 @@ export const ChatInput: FC<Props> = ({
           </button>
         )}
 
-        {!messageIsStreaming && !conversationIsEmpty && (
-          <button
-            className="absolute -top-2 left-0 right-0 mx-auto w-fit rounded border border-neutral-200 bg-white py-2 px-4 text-black dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:top-0"
-            onClick={onRegenerate}
-          >
-            <IconRepeat size={16} className="mb-[2px] inline-block"/>{' '}
-            {t('Regenerate response')}
-          </button>
-        )}
+        {/*TODO: add regenerate button*/}
+        {/*{!messageIsStreaming && !conversationIsEmpty && (*/}
+        {/*  <button*/}
+        {/*    className="absolute -top-2 left-0 right-0 mx-auto w-fit rounded border border-neutral-200 bg-white py-2 px-4 text-black dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:top-0"*/}
+        {/*    onClick={onRegenerate}*/}
+        {/*  >*/}
+        {/*    <IconRepeat size={16} className="mb-[2px] inline-block"/>{' '}*/}
+        {/*    {t('Regenerate response')}*/}
+        {/*  </button>*/}
+        {/*)}*/}
 
         <div
           className="relative flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white py-2 shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] md:py-3 md:pl-4">
