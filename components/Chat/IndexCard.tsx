@@ -16,7 +16,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
   return (
     <>
-      <Card className="rounded-xs cursor-pointer h-48 max-h-64 space-y-4 m-1 shadow-md hover:shadow-lg" onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
+      <Card className="rounded-xs cursor-pointer h-48 max-h-64 space-y-4 m-1 shadow-md hover:shadow-lg dark:bg-neutral-900" onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-xl font-bold">
             {index.name}
