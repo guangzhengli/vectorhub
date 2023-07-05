@@ -8,6 +8,7 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} 
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select"
 import {ModelType} from "@/types/chat";
 import {KeyConfiguration} from "@/types/keyConfiguration";
+import {Cog} from "lucide-react";
 
 interface Props {
     keyConfiguration: KeyConfiguration;
@@ -59,7 +60,9 @@ export const KeySettings: FC<Props> = ({
         <>
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button ref={keyConfigurationButtonRef} className="w-64 dark:border-gray-50" variant="outline">OpenAI API Key Settings</Button>
+                    <Button ref={keyConfigurationButtonRef} className="w-64 dark:border-gray-50">
+                        <Cog />OpenAI API Key Settings
+                    </Button>
                 </SheetTrigger>
                 <SheetContent position="left" size="sm">
                     <SheetHeader>
