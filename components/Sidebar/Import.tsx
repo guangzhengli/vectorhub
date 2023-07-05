@@ -43,7 +43,7 @@ export const Import: FC<Props> = ({ onImport }) => {
         }}
       />
 
-      <Button variant="ghost" onClick={() => {
+      <Button className="w-full justify-start" variant="ghost" onClick={() => {
         const importFile = document.querySelector(
           '#import-file',
         ) as HTMLInputElement;

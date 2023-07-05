@@ -9,7 +9,7 @@ import {Conversation} from "@/types/conversation";
 import {ChatFolder} from "@/types/chat";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {Button} from "@/components/ui/button";
-import {ArrowBigDownDash, FileUp, ImportIcon, Moon, Sun} from "lucide-react";
+import {ArrowBigDownDash, FileUp, ImportIcon, Moon, PlusCircle, Sun} from "lucide-react";
 
 interface Props {
   lightMode: 'light' | 'dark';
@@ -42,24 +42,25 @@ export const SidebarSettings: FC<Props> = (
   const {t} = useTranslation('sidebar');
 
   return (
-    <div className="flex flex-col justify-start items-center space-y-1 border-t border-white/20 pt-1 text-sm">
+    <div className="flex flex-col justify-start items-center space-y-1 border-t border-white/20 pt-1 text-sm w-full">
+
+      <Button className="w-full justify-start" variant="ghost" onClick={() => handleShowIndexFormTabs(true)}>
+        <PlusCircle className="mr-2"/>Create New Index
+      </Button>
+
       <ClearConversations onClearConversations={onClearConversations}/>
 
       <Import onImport={onImportConversations}/>
 
-      <Button variant="ghost" onClick={() => onExportConversations()}>
+      <Button className="w-full justify-start" variant="ghost" onClick={() => onExportConversations()}>
         <FileUp className="mr-2"/>{t('Export conversations')}
       </Button>
 
-      <Button variant="ghost" onClick={() => onToggleLightMode(lightMode === 'light' ? 'dark' : 'light')}>
+      <Button className="w-full justify-start" variant="ghost" onClick={() => onToggleLightMode(lightMode === 'light' ? 'dark' : 'light')}>
         {
           lightMode === 'light' ? <Moon className="mr-2"/> : <Sun className="mr-2"/>
         }
         {lightMode === 'light' ? t('Dark mode') : t('Light mode')}
-      </Button>
-
-      <Button variant="ghost" onClick={() => handleShowIndexFormTabs(true)}>
-        <ArrowBigDownDash className="mr-2"/>Create New Index
       </Button>
 
       <KeySettings keyConfiguration={keyConfiguration} onKeyConfigurationChange={onKeyConfigurationChange}

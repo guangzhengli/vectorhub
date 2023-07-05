@@ -60,7 +60,7 @@ export const KeySettings: FC<Props> = ({
         <>
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button ref={keyConfigurationButtonRef} variant="ghost" className="w-64 dark:border-gray-50">
+                    <Button ref={keyConfigurationButtonRef} variant="ghost" className="w-full justify-start dark:border-gray-50">
                         <Cog className="mr-2"/>OpenAI API Key Settings
                     </Button>
                 </SheetTrigger>

@@ -72,17 +72,14 @@ export const IndexGallery = (
             <TabsTrigger value="likeed">Liked</TabsTrigger>
           </TabsList>
           <TabsContent value="created" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
               {userIndexes.map((index) => (
                 <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
               ))}
-              <Button onClick={() => handleShowIndexFormTabs(true)}>
-                <ArrowBigDownDash className="mr-2 h-4 w-4"/> Create new index
-              </Button>
             </div>
           </TabsContent>
           <TabsContent value="likeed" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
               {userLikedIndexes.map((index) => (
                 <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
               ))}

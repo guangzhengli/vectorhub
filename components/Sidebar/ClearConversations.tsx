@@ -20,7 +20,7 @@ export const ClearConversations: FC<Props> = ({ onClearConversations }) => {
   };
 
   return isConfirming ? (
-    <div className="flex w-full cursor-pointer items-center rounded-md py-3 px-3 hover:bg-[#343541]">
+    <div className="flex w-full justify-start cursor-pointer items-center rounded-md py-3 px-3 hover:bg-[#343541]">
       <IconTrash size={18} />
 
       <div className="ml-3 flex-1 text-left text-[12.5px] leading-3 text-white">
@@ -48,7 +48,7 @@ export const ClearConversations: FC<Props> = ({ onClearConversations }) => {
       </div>
     </div>
   ) : (
-    <Button variant="ghost" onClick={() => setIsConfirming(true)}>
+    <Button className="w-full justify-start" variant="ghost" onClick={() => setIsConfirming(true)}>
       <Trash2 className="mr-2"/>{t('Clear conversations')}
     </Button>
   );
