@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { SidebarButton } from './SidebarButton';
 import {Button} from "@/components/ui/button";
-import {ArrowBigDownDash, Trash2} from "lucide-react";
+import {ArrowBigDownDash, Trash, Trash2} from "lucide-react";
 
 interface Props {
   onClearConversations: () => void;
@@ -20,10 +20,10 @@ export const ClearConversations: FC<Props> = ({ onClearConversations }) => {
   };
 
   return isConfirming ? (
-    <div className="flex w-full justify-start cursor-pointer items-center rounded-md py-3 px-3 hover:bg-[#343541]">
-      <IconTrash size={18} />
+    <div className="flex w-full justify-start cursor-pointer items-center rounded-md py-2 px-3">
+      <Trash className="mr-2 ml-1"/>
 
-      <div className="ml-3 flex-1 text-left text-[12.5px] leading-3 text-white">
+      <div className="flex-1 text-left text-md text-white">
         {t('Are you sure?')}
       </div>
 
