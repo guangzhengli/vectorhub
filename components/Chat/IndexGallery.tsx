@@ -7,6 +7,7 @@ import {ArrowBigDownDash} from "lucide-react";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {Index} from "@/types/index";
 import {LlamaIndex} from "@/types/llamaIndex";
+import {Label} from "@/components/ui/label";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
@@ -92,7 +93,8 @@ export const IndexGallery = (
           </TabsContent>
         </Tabs>
         <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Vector Hub</h2>
+          {/*<h2 className="text-3xl font-bold tracking-tight">Vector Hub</h2>*/}
+          <Label className="">Vector Hub</Label>
         </div>
         <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
           {indexes.map((index) => (

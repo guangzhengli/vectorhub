@@ -18,11 +18,11 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
     <>
       <Card className="cursor-pointer max-h-32 shadow-md hover:shadow-lg" onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-lg font-bold">
+          <CardTitle className="text-xl font-bold">
             {index.name}
           </CardTitle>
-            <div className="flex items-center space-x-4">
-              <Avatar className="">
+            <div className="flex items-center space-x-2">
+              <Avatar className="h-6 w-6">
                 <AvatarImage
                   src={index.author?.image ? index.author?.image : 'https://avatars.githubusercontent.com/u/138222923'}/>
                 <AvatarFallback>OM</AvatarFallback>
