@@ -5,6 +5,8 @@ import {IconFileImport} from '@tabler/icons-react';
 import {useTranslation} from 'next-i18next';
 import {FC} from 'react';
 import {SidebarButton} from './SidebarButton';
+import {Button} from "@/components/ui/button";
+import {ImportIcon} from "lucide-react";
 
 interface Props {
   onImport: (data: {
@@ -41,18 +43,16 @@ export const Import: FC<Props> = ({ onImport }) => {
         }}
       />
 
-      <SidebarButton
-        text={t('Import conversations')}
-        icon={<IconFileImport size={18} />}
-        onClick={() => {
-          const importFile = document.querySelector(
-            '#import-file',
-          ) as HTMLInputElement;
-          if (importFile) {
-            importFile.click();
-          }
-        }}
-      />
+      <Button variant="ghost" onClick={() => {
+        const importFile = document.querySelector(
+          '#import-file',
+        ) as HTMLInputElement;
+        if (importFile) {
+          importFile.click();
+        }
+      }}>
+        <ImportIcon className="mr-2"/>{t('Import conversations')}
+      </Button>
     </>
   );
 };

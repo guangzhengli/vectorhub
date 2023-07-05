@@ -2,6 +2,8 @@ import { IconCheck, IconTrash, IconX } from '@tabler/icons-react';
 import { FC, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { SidebarButton } from './SidebarButton';
+import {Button} from "@/components/ui/button";
+import {ArrowBigDownDash, Trash2} from "lucide-react";
 
 interface Props {
   onClearConversations: () => void;
@@ -46,10 +48,8 @@ export const ClearConversations: FC<Props> = ({ onClearConversations }) => {
       </div>
     </div>
   ) : (
-    <SidebarButton
-      text={t('Clear conversations')}
-      icon={<IconTrash size={18} />}
-      onClick={() => setIsConfirming(true)}
-    />
+    <Button variant="ghost" onClick={() => setIsConfirming(true)}>
+      <Trash2 className="mr-2"/>{t('Clear conversations')}
+    </Button>
   );
 };

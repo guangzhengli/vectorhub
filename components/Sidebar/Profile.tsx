@@ -42,7 +42,7 @@ export const Profile: FC<Props> = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">
+          <Button variant="ghost">
           <div className="flex items-center justify-between space-x-4">
               <div className="flex items-center space-x-4">
                 <Avatar>
@@ -51,8 +51,8 @@ export const Profile: FC<Props> = () => {
                   <AvatarFallback>OM</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-medium leading-none">{session?.user?.name}</p>
-                  <p className="text-sm text-muted-foreground">{session?.user?.email}</p>
+                  <p className="text-md font-medium leading-none">{session?.user?.name}</p>
+                  <p className="text-xs font-medium mt-1">{session?.user?.email}</p>
                 </div>
               </div>
             </div>

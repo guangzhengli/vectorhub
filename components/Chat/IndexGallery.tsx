@@ -86,9 +86,6 @@ export const IndexGallery = (
               {userLikedIndexes.map((index) => (
                 <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
               ))}
-              <Button variant="outline" className="h-10 w-10" onClick={() => handleShowIndexFormTabs(true)}>
-                <ArrowBigDownDash className="mr-2 h-4 w-4"/>Create new index
-              </Button>
             </div>
           </TabsContent>
         </Tabs>
@@ -100,7 +97,7 @@ export const IndexGallery = (
             <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
           ))}
         </div>
-        <div className="flex justify-center text-black">
+        <div className="flex justify-center text-black dark:text-white">
           <Button variant="outline" onClick={handleLoadMore}>
             <ArrowBigDownDash className="mr-2 h-4 w-4"/> Load More
           </Button>

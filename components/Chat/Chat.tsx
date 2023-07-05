@@ -24,6 +24,8 @@ interface Props {
   onEditMessage: (message: Message, messageIndex: number) => void;
   stopConversationRef: MutableRefObject<boolean>;
   handleKeyConfigurationValidation: () => boolean;
+  isShowIndexFormTabs: boolean;
+  handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
 }
 
 export const Chat: FC<Props> = memo(
@@ -37,6 +39,8 @@ export const Chat: FC<Props> = memo(
      onEditMessage,
      stopConversationRef,
      handleKeyConfigurationValidation,
+     isShowIndexFormTabs,
+     handleShowIndexFormTabs,
    }) => {
     const {t} = useTranslation('chat');
     const [currentMessage, setCurrentMessage] = useState<Message>();
@@ -44,7 +48,6 @@ export const Chat: FC<Props> = memo(
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState<string>();
     const [isUploadSuccess, setIsUploadSuccess] = useState(true);
-    const [isShowIndexFormTabs, setIsShowIndexFormTabs] = useState<boolean>(false);
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -60,10 +63,6 @@ export const Chat: FC<Props> = memo(
 
     const handleUploadError = (errorMsg: string) => {
       setErrorMsg(errorMsg);
-    }
-
-    const handleShowIndexFormTabs = (isShowIndexForm: boolean) => {
-      setIsShowIndexFormTabs(isShowIndexForm);
     }
 
     const onClearAll = () => {
@@ -112,75 +111,77 @@ export const Chat: FC<Props> = memo(
 
     return (
       <>
-        { isShowIndexFormTabs ? (
-          <IndexFormTabs keyConfiguration={keyConfiguration} handleKeyConfigurationValidation={handleKeyConfigurationValidation} handleShowIndexFormTabs={setIsShowIndexFormTabs} />
+        {isShowIndexFormTabs ? (
+          <IndexFormTabs keyConfiguration={keyConfiguration}
+                         handleKeyConfigurationValidation={handleKeyConfigurationValidation}
+                         handleShowIndexFormTabs={handleShowIndexFormTabs}/>
         ) : (
-        <div className="overflow-none relative flex-1 bg-white dark:bg-[#343541]">
-          <>
-            <div
-              className="max-h-full overflow-x-hidden"
-              ref={chatContainerRef}
-            >
-              {(conversation.index?.indexName.length === 0) && (conversation.messages.length === 0) ? (
-                <>
-                  <IndexGallery keyConfiguration={keyConfiguration}
-                                handleKeyConfigurationValidation={handleKeyConfigurationValidation}
-                                handleShowIndexFormTabs={handleShowIndexFormTabs}
-                                onIndexChange={(index) =>
-                                  onUpdateConversation(conversation, {
-                                    key: 'index',
-                                    value: index,
-                                  })}/>
-                </>
-              ) : (
-                <>
-                  <div
-                    className="flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                    {t('File')}: {conversation.index.indexName}
-                    <IconClearAll
-                      className="ml-2 cursor-pointer hover:opacity-50"
-                      onClick={onClearAll}
-                      size={18}
+          <div className="overflow-none relative flex-1 bg-white dark:bg-[#343541]">
+            <>
+              <div
+                className="max-h-full overflow-x-hidden"
+                ref={chatContainerRef}
+              >
+                {(conversation.index?.indexName.length === 0) && (conversation.messages.length === 0) ? (
+                  <>
+                    <IndexGallery keyConfiguration={keyConfiguration}
+                                  handleKeyConfigurationValidation={handleKeyConfigurationValidation}
+                                  handleShowIndexFormTabs={handleShowIndexFormTabs}
+                                  onIndexChange={(index) =>
+                                    onUpdateConversation(conversation, {
+                                      key: 'index',
+                                      value: index,
+                                    })}/>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      className="flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                      {t('File')}: {conversation.index.indexName}
+                      <IconClearAll
+                        className="ml-2 cursor-pointer hover:opacity-50"
+                        onClick={onClearAll}
+                        size={18}
+                      />
+                    </div>
+                    {conversation.messages.map((message, index) => (
+                      <ChatMessage
+                        key={index}
+                        message={message}
+                        messageIndex={index}
+                        onEditMessage={onEditMessage}
+                      />
+                    ))}
+
+                    {loading && <ChatLoader/>}
+
+                    <div
+                      className="h-[162px] bg-white dark:bg-[#343541]"
+                      ref={messagesEndRef}
                     />
-                  </div>
-                  {conversation.messages.map((message, index) => (
-                    <ChatMessage
-                      key={index}
-                      message={message}
-                      messageIndex={index}
-                      onEditMessage={onEditMessage}
-                    />
-                  ))}
+                  </>
+                )}
+              </div>
 
-                  {loading && <ChatLoader/>}
-
-                  <div
-                    className="h-[162px] bg-white dark:bg-[#343541]"
-                    ref={messagesEndRef}
-                  />
-                </>
-              )}
-            </div>
-
-            <ChatInput
-              stopConversationRef={stopConversationRef}
-              textareaRef={textareaRef}
-              messageIsStreaming={messageIsStreaming}
-              conversationIsEmpty={conversation.messages.length > 0}
-              onSend={(message) => {
-                setCurrentMessage(message);
-                onSend(message);
-              }}
-              onRegenerate={() => {
-                if (currentMessage) {
-                  onSend(currentMessage, 2);
-                }
-              }}
-              handleKeyConfigurationValidation={handleKeyConfigurationValidation}
-            />
-          </>
-        </div>
-          )}
+              <ChatInput
+                stopConversationRef={stopConversationRef}
+                textareaRef={textareaRef}
+                messageIsStreaming={messageIsStreaming}
+                conversationIsEmpty={conversation.messages.length > 0}
+                onSend={(message) => {
+                  setCurrentMessage(message);
+                  onSend(message);
+                }}
+                onRegenerate={() => {
+                  if (currentMessage) {
+                    onSend(currentMessage, 2);
+                  }
+                }}
+                handleKeyConfigurationValidation={handleKeyConfigurationValidation}
+              />
+            </>
+          </div>
+        )}
       </>
     );
   },

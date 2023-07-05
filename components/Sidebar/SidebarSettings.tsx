@@ -8,6 +8,8 @@ import {KeySettings} from './KeySettings';
 import {Conversation} from "@/types/conversation";
 import {ChatFolder} from "@/types/chat";
 import {KeyConfiguration} from "@/types/keyConfiguration";
+import {Button} from "@/components/ui/button";
+import {ArrowBigDownDash, FileUp, ImportIcon, Moon, Sun} from "lucide-react";
 
 interface Props {
   lightMode: 'light' | 'dark';
@@ -21,42 +23,47 @@ interface Props {
   keyConfiguration: KeyConfiguration;
   onKeyConfigurationChange: (keySettings: KeyConfiguration) => void;
   keyConfigurationButtonRef: React.RefObject<HTMLButtonElement>;
+  handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
+
 }
 
-export const SidebarSettings: FC<Props> = ({
-  lightMode,
-  onToggleLightMode,
-  onClearConversations,
-  onExportConversations,
-  onImportConversations,
-  keyConfiguration,
-  onKeyConfigurationChange,
-  keyConfigurationButtonRef,
-}) => {
-  const { t } = useTranslation('sidebar');
+export const SidebarSettings: FC<Props> = (
+  {
+    lightMode,
+    onToggleLightMode,
+    onClearConversations,
+    onExportConversations,
+    onImportConversations,
+    keyConfiguration,
+    onKeyConfigurationChange,
+    keyConfigurationButtonRef,
+    handleShowIndexFormTabs,
+  }) => {
+  const {t} = useTranslation('sidebar');
 
   return (
-    <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">
-      <ClearConversations onClearConversations={onClearConversations} />
+    <div className="flex flex-col justify-start items-center space-y-1 border-t border-white/20 pt-1 text-sm">
+      <ClearConversations onClearConversations={onClearConversations}/>
 
-      <Import onImport={onImportConversations} />
+      <Import onImport={onImportConversations}/>
 
-      <SidebarButton
-        text={t('Export conversations')}
-        icon={<IconFileExport size={18} />}
-        onClick={() => onExportConversations()}
-      />
+      <Button variant="ghost" onClick={() => onExportConversations()}>
+        <FileUp className="mr-2"/>{t('Export conversations')}
+      </Button>
 
-      <SidebarButton
-        text={lightMode === 'light' ? t('Dark mode') : t('Light mode')}
-        icon={
-          lightMode === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />
+      <Button variant="ghost" onClick={() => onToggleLightMode(lightMode === 'light' ? 'dark' : 'light')}>
+        {
+          lightMode === 'light' ? <Moon className="mr-2"/> : <Sun className="mr-2"/>
         }
-        onClick={() =>
-          onToggleLightMode(lightMode === 'light' ? 'dark' : 'light')
-        }
-      />
-      <KeySettings keyConfiguration={keyConfiguration} onKeyConfigurationChange={onKeyConfigurationChange} keyConfigurationButtonRef={keyConfigurationButtonRef}/>
+        {lightMode === 'light' ? t('Dark mode') : t('Light mode')}
+      </Button>
+
+      <Button variant="ghost" onClick={() => handleShowIndexFormTabs(true)}>
+        <ArrowBigDownDash className="mr-2"/>Create New Index
+      </Button>
+
+      <KeySettings keyConfiguration={keyConfiguration} onKeyConfigurationChange={onKeyConfigurationChange}
+                   keyConfigurationButtonRef={keyConfigurationButtonRef}/>
     </div>
   );
 };

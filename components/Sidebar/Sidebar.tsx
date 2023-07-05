@@ -37,6 +37,7 @@ interface Props {
   keyConfiguration: KeyConfiguration;
   onKeyConfigurationChange: (keySettings: KeyConfiguration) => void;
   keyConfigurationButtonRef: React.RefObject<HTMLButtonElement>;
+  handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
 }
 
 export const Sidebar: FC<Props> = ({
@@ -60,6 +61,7 @@ export const Sidebar: FC<Props> = ({
   keyConfiguration,
   onKeyConfigurationChange,
   keyConfigurationButtonRef,
+  handleShowIndexFormTabs,
 }) => {
   const { t } = useTranslation('sidebar');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -209,6 +211,7 @@ export const Sidebar: FC<Props> = ({
         keyConfiguration={keyConfiguration}
         onKeyConfigurationChange={onKeyConfigurationChange}
         keyConfigurationButtonRef={keyConfigurationButtonRef}
+        handleShowIndexFormTabs={handleShowIndexFormTabs}
       />
     </aside>
   );
