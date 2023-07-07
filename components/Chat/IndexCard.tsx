@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/button";
 import {LlamaIndex} from "@/types/llamaIndex";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import { MouseEvent } from 'react';
+import { Badge } from "../ui/badge";
 
 interface Props {
   onIndexChange: (index: LlamaIndex) => void;
@@ -44,9 +45,11 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
           <div className="flex justify-between items-center space-x-2 w-full">
             <div className="rounded-none mr-1">
               { index.tags && index.tags.length > 0 && (
-                <p className="text-xs border border-gray-400 rounded p-1">
-                  {index.tags}
-                </p>
+                <>
+                  { index.tags.map((tag, key) => (
+                    <Badge key={key} variant="outline" className="mr-1">{tag}</Badge>
+                  )) }
+                </>
               )}
             </div>
             <div>
