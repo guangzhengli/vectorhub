@@ -10,6 +10,19 @@ import {Conversation} from "@/types/conversation";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {IndexGallery} from "@/components/Chat/IndexGallery";
 import {IndexFormTabs} from "@/components/Chat/IndexFormTabs";
+import {Button} from "@/components/ui/button";
+import {Eraser, Heart} from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 interface Props {
   conversation: Conversation;
@@ -45,31 +58,10 @@ export const Chat: FC<Props> = memo(
     const {t} = useTranslation('chat');
     const [currentMessage, setCurrentMessage] = useState<Message>();
     const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
-    const [isUploading, setIsUploading] = useState<boolean>(false);
-    const [errorMsg, setErrorMsg] = useState<string>();
-    const [isUploadSuccess, setIsUploadSuccess] = useState(true);
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-    const handleIsUploading = (isUploading: boolean) => {
-      setIsUploading(isUploading);
-    }
-
-    const handleIsUploadSuccess = (isUploadSuccess: boolean) => {
-      setIsUploadSuccess(isUploadSuccess);
-    }
-
-    const handleUploadError = (errorMsg: string) => {
-      setErrorMsg(errorMsg);
-    }
-
-    const onClearAll = () => {
-      if (confirm(t<string>('Are you sure you want to clear all messages?'))) {
-        onUpdateConversation(conversation, {key: 'messages', value: []});
-      }
-    };
 
     const scrollDown = () => {
       if (autoScrollEnabled) {
@@ -135,14 +127,27 @@ export const Chat: FC<Props> = memo(
                   </>
                 ) : (
                   <>
-                    <div
-                      className="flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                      {t('File')}: {conversation.index.indexName}
-                      <IconClearAll
-                        className="ml-2 cursor-pointer hover:opacity-50"
-                        onClick={onClearAll}
-                        size={18}
-                      />
+                    <div className="flex justify-center items-center border border-b-neutral-300 bg-neutral-100 py-2 text-lg text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                      {conversation.index.indexName}
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="link">
+                            <Eraser className="w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure you want to clear all messages?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently delete all messages in this conversation.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => onUpdateConversation(conversation, {key: 'messages', value: []})}>Continue</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                     {conversation.messages.map((message, index) => (
                       <ChatMessage
