@@ -1,4 +1,4 @@
-import {FC, useCallback} from "react";
+import {FC, useCallback, useState} from "react";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../ui/card";
 import {Heart} from "lucide-react";
 import {Index} from "../../types/index";
@@ -15,15 +15,14 @@ interface Props {
 
 export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
-  const handleLikeIndex = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
+  const handleLikeIndex = () => {
     console.log("asdfds")
-  }, []);
+  };
 
   return (
     <>
-      <Card className="rounded-xs cursor-pointer h-48 max-h-64 space-y-4 m-1 shadow-md hover:shadow-lg dark:bg-neutral-900" onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <Card className="rounded-xs cursor-pointer h-48 max-h-64 space-y-4 m-1 shadow-md hover:shadow-lg dark:bg-neutral-900">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
           <CardTitle className="text-xl font-bold">
             {index.name}
           </CardTitle>
@@ -38,7 +37,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
               </div>
             </div>
         </CardHeader>
-        <CardContent>
+        <CardContent onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
           <div className="text-sm font-medium">{index.description}</div>
         </CardContent>
         <CardFooter>
@@ -53,7 +52,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
               )}
             </div>
             <div>
-              <Button variant="ghost" onClick={() => handleLikeIndex}>
+              <Button variant="ghost" onClick={handleLikeIndex}>
                 <Heart className="h-4 w-4" />
               </Button>
             </div>
