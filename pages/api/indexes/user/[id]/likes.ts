@@ -40,14 +40,14 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePut = async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getServerSession(req, res, authOptions);
-    const { indexIds } = req.query;
+    const { likedIndexIds } = req.query;
 
     if (!session?.user?.id) {
         res.status(401).json({ message: "Unauthorized" });
         return;
     }
 
-    if (!indexIds || indexIds.length === 0) {
+    if (!likedIndexIds || likedIndexIds.length === 0) {
         res.status(400).json({ message: "No index IDs provided" });
         return;
     }
@@ -56,7 +56,7 @@ const handlePut = async (req: NextApiRequest, res: NextApiResponse) => {
         where: { id: session?.user?.id as string },
         data: {
             likedIndexIds: {
-                set: indexIds as string[],
+                set: likedIndexIds as string[],
             }
         }
     });

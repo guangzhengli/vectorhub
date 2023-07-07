@@ -1,11 +1,11 @@
-import {FC} from "react";
-import {Card, CardHeader, CardTitle, CardContent, CardFooter} from "../ui/card";
-import {Users} from "lucide-react";
+import {FC, useCallback} from "react";
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../ui/card";
+import {Heart} from "lucide-react";
 import {Index} from "../../types/index";
 import {Button} from "@/components/ui/button";
 import {LlamaIndex} from "@/types/llamaIndex";
-import {useSession} from "next-auth/react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import { MouseEvent } from 'react';
 
 interface Props {
   onIndexChange: (index: LlamaIndex) => void;
@@ -13,6 +13,11 @@ interface Props {
 }
 
 export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
+
+  const handleLikeIndex = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    console.log("asdfds")
+  }, []);
 
   return (
     <>
@@ -35,14 +40,22 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
         <CardContent>
           <div className="text-sm font-medium">{index.description}</div>
         </CardContent>
-        {/*TODO: add tags in card footer*/}
-        {/*<CardFooter>*/}
-        {/*  { index.tags && index.tags.length > 0 && (*/}
-        {/*    <p className="text-xs border border-gray-400 rounded p-1">*/}
-        {/*      {index.tags}*/}
-        {/*    </p>*/}
-        {/*  )}*/}
-        {/*</CardFooter>*/}
+        <CardFooter>
+          <div className="flex justify-between items-center space-x-2 w-full">
+            <div className="rounded-none mr-1">
+              { index.tags && index.tags.length > 0 && (
+                <p className="text-xs border border-gray-400 rounded p-1">
+                  {index.tags}
+                </p>
+              )}
+            </div>
+            <div>
+              <Button variant="ghost" onClick={() => handleLikeIndex}>
+                <Heart className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </CardFooter>
       </Card>
     </>
   )

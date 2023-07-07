@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const message: string = req.query.message as string;
     const indexId: string = req.query.indexId as string;
 
-    console.log("handler chatfile query: ", message, indexId);
+    console.log("handler vector query: ", message, indexId);
     const vectorStore = await getVectorStore(keyConfiguration);
 
     const documents = await vectorStore.similaritySearchWithScore(message, 2,
