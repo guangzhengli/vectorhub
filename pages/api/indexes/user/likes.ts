@@ -9,26 +9,30 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const indexes = await prisma?.index.findMany({
-    where: {
-      likes: {
-        some: {
-          userId: session?.user?.id as string,
+  try {
+    const indexes = await prisma?.index.findMany({
+      where: {
+        likes: {
+          some: {
+            userId: session?.user?.id as string,
+          }
         }
-      }
-    },
-    select: {
-      id: true,
-      name: true,
-      description: true,
-      tags: true,
-    },
-    orderBy: {
-      likesCount: 'desc',
-    },
-  });
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        tags: true,
+      },
+      orderBy: {
+        likesCount: 'desc',
+      },
+    });
 
-  res.status(200).json(indexes);
+    res.status(200).json(indexes);
+  } catch (e) {
+    res.status(500).json({message: (e as Error).message});
+  }
 }
 
 const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -40,14 +44,23 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const createdData = await prisma?.like.create({
-    data: {
-      userId: session?.user?.id as string,
-      indexId: indexId as string,
-    }
-  });
+  try {
+    const createdData = await prisma?.like.create({
+      data: {
+        userId: session?.user?.id as string,
+        indexId: indexId as string,
+      }
+    });
 
-  res.status(200).json(createdData);
+    await prisma?.index.update({
+      where: {id: indexId},
+      data: {likesCount: {increment: 1}},
+    });
+
+    res.status(200).json(createdData);
+  } catch (e) {
+    res.status(500).json({message: (e as Error).message});
+  }
 }
 
 const handleDelete = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -58,17 +71,25 @@ const handleDelete = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(401).json({message: "Unauthorized"});
     return;
   }
-
-  await prisma?.like.delete({
-    where: {
-      userId_indexId: {
-        userId: session?.user?.id as string,
-        indexId: indexId as string,
+  try {
+    await prisma?.like.delete({
+      where: {
+        userId_indexId: {
+          userId: session?.user?.id as string,
+          indexId: indexId as string,
+        }
       }
-    }
-  });
+    });
 
-  res.status(200).json({message: "unliked successfully"});
+    await prisma?.index.update({
+      where: {id: indexId},
+      data: {likesCount: {decrement: 1}},
+    });
+
+    res.status(200).json({message: "unliked successfully"});
+  } catch (e) {
+    res.status(500).json({message: (e as Error).message});
+  }
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

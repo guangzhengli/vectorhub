@@ -18,10 +18,12 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
   const [isIndexCurrentUserLiked, setIsIndexCurrentUserLiked] = useState(!!(index.likes && index.likes.length > 0));
   const [heartBackground, setHeartBackground] = useState('');
+  const [indexLikesCount, setIndexLikesCount] = useState(index.likesCount ? index.likesCount : undefined);
 
   const handleLikeIndex = async () => {
     if (isIndexCurrentUserLiked) {
       setHeartBackground('')
+      setIndexLikesCount(indexLikesCount ? indexLikesCount - 1 : 0)
       await fetch('/api/indexes/user/likes', {
         method: 'DELETE',
         headers: {
@@ -40,6 +42,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
       });
     } else {
       setHeartBackground("text-red-600 dark: text-red-700")
+      setIndexLikesCount(indexLikesCount ? indexLikesCount + 1 : 1)
       await fetch('/api/indexes/user/likes', {
         method: 'POST',
         headers: {
@@ -100,7 +103,9 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
             <div>
               <Button variant="ghost" onClick={handleLikeIndex}>
                 <Heart className={heartBackground} />
-                {index.likesCount? index.likesCount.toString() : undefined}
+                <div className="ml-2">
+                  {indexLikesCount?.toString()}
+                </div>
               </Button>
             </div>
           </div>

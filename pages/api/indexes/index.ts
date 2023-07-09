@@ -8,36 +8,40 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
   const pageSize = 20;
   const skip = page ? (Number(page) - 1) * pageSize : 0;
 
-  const indexes = await prisma?.index.findMany({
-    where: {
-      published: true,
-    },
-    include: {
-      likes: {
-        where: {
-          userId: session?.user?.id as string,
+  try {
+    const indexes = await prisma?.index.findMany({
+      where: {
+        published: true,
+      },
+      include: {
+        likes: {
+          where: {
+            userId: session?.user?.id as string,
+          }
+        },
+        author: {
+          select: {
+            name: true,
+            image: true,
+          }
         }
       },
-      author: {
-        select: {
-          name: true,
-          image: true,
+      orderBy: [
+        {
+          likesCount: 'desc',
+        },
+        {
+          createdAt: 'desc',
         }
-      }
-    },
-    orderBy: [
-      {
-        likesCount: 'desc',
-      },
-      {
-        createdAt: 'desc',
-      }
-    ],
-    skip,
-    take: pageSize,
-  });
+      ],
+      skip,
+      take: pageSize,
+    });
 
-  res.status(200).json(indexes);
+    res.status(200).json(indexes);
+  } catch (e) {
+    res.status(500).json({message: (e as Error).message});
+  }
 }
 
 const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
