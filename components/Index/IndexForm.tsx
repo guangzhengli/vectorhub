@@ -110,6 +110,8 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
         const message = await res.text();
         console.log('save embedding failed: ', message);
         setErrorMessage(message)
+      } else {
+        handleShowIndexFormTabs(false)
       }
     });
   }

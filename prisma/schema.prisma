@@ -30,7 +30,7 @@ model Index {
   updatedAt   DateTime @updatedAt
   author      User?    @relation(fields: [authorId], references: [id])
   authorId    String?
-  likesCount  BigInt   @default(0)
+  likesCount  Int   @default(0)
   likes       Like[]
 }
 

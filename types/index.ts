@@ -8,7 +8,7 @@ export interface Index {
   prompt?: string;
   tags?: string[];
   questions?: string[];
-  likesCount?: bigint;
+  likesCount?: number;
   published: boolean;
   createdAt: Date;
   updatedAt: Date;

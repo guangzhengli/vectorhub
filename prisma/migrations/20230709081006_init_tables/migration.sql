@@ -21,7 +21,7 @@ CREATE TABLE "Index" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "authorId" TEXT,
-    "likesCount" BIGINT NOT NULL DEFAULT 0,
+    "likesCount" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Index_pkey" PRIMARY KEY ("id")
 );
