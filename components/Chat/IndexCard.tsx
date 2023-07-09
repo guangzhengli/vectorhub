@@ -36,6 +36,8 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
         if (!res.ok) {
           const message = await res.text();
           console.log(`like index error: ${message}, the index id is ${index.id}`);
+          setHeartBackground("text-red-600 dark: text-red-700")
+          setIndexLikesCount(indexLikesCount ? indexLikesCount + 1 : 0)
         } else {
           setIsIndexCurrentUserLiked(false);
         }
@@ -55,6 +57,8 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
         if (!res.ok) {
           const message = await res.text();
           console.log(`like index error: ${message}, the index id is ${index.id}`);
+          setHeartBackground("")
+          setIndexLikesCount(indexLikesCount ? indexLikesCount - 1 : 1)
         } else {
           setIsIndexCurrentUserLiked(true);
         }
@@ -64,7 +68,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
   useEffect(() => {
     if (isIndexCurrentUserLiked) {
-      setHeartBackground("text-red-600 dark: text-red-700")
+      setHeartBackground("text-red-500 dark: text-red-700")
     }
   }, [isIndexCurrentUserLiked]);
 
