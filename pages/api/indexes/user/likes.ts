@@ -33,7 +33,7 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
-  const {indexId} = req.query;
+  const {indexId} = req.body;
 
   if (!session?.user?.id) {
     res.status(401).json({message: "Unauthorized"});
@@ -52,7 +52,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handleDelete = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
-  const {indexId} = req.query;
+  const {indexId} = req.body;
 
   if (!session?.user?.id) {
     res.status(401).json({message: "Unauthorized"});
