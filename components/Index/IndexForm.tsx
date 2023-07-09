@@ -102,7 +102,7 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
         tags: data.tags?.map((tag) => tag.value),
         questions: data.questions?.map((question) => question.value),
         published: data.published,
-        likes: 0,
+        likesCount: 0,
       })
     }).then(async (res) => {
       setIsSubmitting(false)

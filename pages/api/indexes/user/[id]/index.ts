@@ -18,6 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             name: true,
             description: true,
             tags: true,
+            likesCount: true,
         },
         orderBy: {
             updatedAt: 'desc',

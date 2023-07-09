@@ -1,9 +1,9 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {getSession} from "next-auth/react";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getServerSession(req, res, authOptions);
   const {page} = req.query;
   const pageSize = 20;
   const skip = page ? (Number(page) - 1) * pageSize : 0;
@@ -12,21 +12,22 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
     where: {
       published: true,
     },
-    select: {
-      id: true,
-      name: true,
-      description: true,
+    include: {
+      likes: {
+        where: {
+          userId: session?.user?.id as string,
+        }
+      },
       author: {
         select: {
           name: true,
           image: true,
         }
-      },
-      tags: true,
+      }
     },
     orderBy: [
       {
-        likes: 'desc',
+        likesCount: 'desc',
       },
       {
         createdAt: 'desc',
@@ -40,7 +41,7 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {id, name, description, prompt, tags, questions, published, likes} = req.body;
+  const {id, name, description, prompt, tags, questions, published, likesCount} = req.body;
   const session = await getServerSession(req, res, authOptions);
 
   try {
@@ -53,7 +54,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         tags: tags,
         questions: questions,
         published: published,
-        likes: likes,
+        likesCount: likesCount,
         authorId: session?.user?.id
       }
     })
