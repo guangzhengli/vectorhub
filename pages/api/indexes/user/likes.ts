@@ -18,11 +18,18 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
           }
         }
       },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        tags: true,
+      include: {
+        likes: {
+          where: {
+            userId: session?.user?.id as string,
+          }
+        },
+        author: {
+          select: {
+            name: true,
+            image: true,
+          }
+        }
       },
       orderBy: {
         likesCount: 'desc',
