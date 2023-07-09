@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@aashutoshrathi/word-wrap@^1.2.3":
+  version "1.2.6"
+  resolved "https://registry.npmjs.org/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz"
+  integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
+
 "@anthropic-ai/sdk@^0.4.3":
   version "0.4.3"
   resolved "https://registry.npmjs.org/@anthropic-ai/sdk/-/sdk-0.4.3.tgz"
@@ -9,6 +14,25 @@
   dependencies:
     "@fortaine/fetch-event-source" "^3.0.6"
     cross-fetch "^3.1.5"
+
+"@auth/core@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.npmjs.org/@auth/core/-/core-0.8.1.tgz"
+  integrity sha512-WudBmZudZ/cvykxHV5hIwrYsd7AlETQ535O7w3sSiiumT28+U9GvBb8oSRtfzxpW9rym3lAdfeTJqGA8U4FecQ==
+  dependencies:
+    "@panva/hkdf" "^1.0.4"
+    cookie "0.5.0"
+    jose "^4.11.1"
+    oauth4webapi "^2.0.6"
+    preact "10.11.3"
+    preact-render-to-string "5.2.3"
+
+"@auth/prisma-adapter@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@auth/prisma-adapter/-/prisma-adapter-1.0.0.tgz"
+  integrity sha512-+x+s5dgpNmqrcQC2ZRAXZIM6yhkWP/EXjIUgqUyMepLiX1OHi2AXIUAAbXsW4oG9OpYr/rvPIzPBpuGt6sPFwQ==
+  dependencies:
+    "@auth/core" "0.8.1"
 
 "@babel/runtime@^7.13.10", "@babel/runtime@^7.20.13", "@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7", "@babel/runtime@^7.3.1":
   version "7.21.0"
@@ -150,7 +174,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@panva/hkdf@^1.0.2":
+"@panva/hkdf@^1.0.2", "@panva/hkdf@^1.0.4":
   version "1.1.1"
   resolved "https://registry.npmjs.org/@panva/hkdf/-/hkdf-1.1.1.tgz"
   integrity sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==
@@ -179,22 +203,22 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.7.tgz"
   integrity sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==
 
-"@prisma/client@^4.16.1", "@prisma/client@>=2.26.0 || >=3":
-  version "4.16.1"
-  resolved "https://registry.npmjs.org/@prisma/client/-/client-4.16.1.tgz"
-  integrity sha512-CoDHu7Bt+NuDo40ijoeHP79EHtECsPBTy3yte5Yo3op8TqXt/kV0OT5OrsWewKvQGKFMHhYQ+ePed3zzjYdGAw==
+"@prisma/client@^4.16.2", "@prisma/client@>=2.26.0 || >=3", "@prisma/client@>=2.26.0 || >=3 || >=4":
+  version "4.16.2"
+  resolved "https://registry.npmjs.org/@prisma/client/-/client-4.16.2.tgz"
+  integrity sha512-qCoEyxv1ZrQ4bKy39GnylE8Zq31IRmm8bNhNbZx7bF2cU5aiCCnSa93J2imF88MBjn7J9eUQneNxUQVJdl/rPQ==
   dependencies:
-    "@prisma/engines-version" "4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c"
+    "@prisma/engines-version" "4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
 
-"@prisma/engines-version@4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c":
-  version "4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c"
-  resolved "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c.tgz"
-  integrity sha512-tMWAF/qF00fbUH1HB4Yjmz6bjh7fzkb7Y3NRoUfMlHu6V+O45MGvqwYxqwBjn1BIUXkl3r04W351D4qdJjrgvA==
+"@prisma/engines-version@4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81":
+  version "4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
+  resolved "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81.tgz"
+  integrity sha512-q617EUWfRIDTriWADZ4YiWRZXCa/WuhNgLTVd+HqWLffjMSPzyM5uOWoauX91wvQClSKZU4pzI4JJLQ9Kl62Qg==
 
-"@prisma/engines@4.16.1":
-  version "4.16.1"
-  resolved "https://registry.npmjs.org/@prisma/engines/-/engines-4.16.1.tgz"
-  integrity sha512-gpZG0kGGxfemgvK/LghHdBIz+crHkZjzszja94xp4oytpsXrgt/Ice82MvPsWMleVIniKuARrowtsIsim0PFJQ==
+"@prisma/engines@4.16.2":
+  version "4.16.2"
+  resolved "https://registry.npmjs.org/@prisma/engines/-/engines-4.16.2.tgz"
+  integrity sha512-vx1nxVvN4QeT/cepQce68deh/Turxy5Mr+4L4zClFuK1GlxN3+ivxfuv+ej/gvidWn1cE1uAhW7ALLNlYbRUAw==
 
 "@radix-ui/number@1.0.1":
   version "1.0.1"
@@ -831,10 +855,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0", "@types/react@>=16", "@types/react@18.0.30":
-  version "18.0.30"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.30.tgz"
-  integrity sha512-AnME2cHDH11Pxt/yYX6r0w448BfTwQOLEhQEjCdwB7QskEI7EKtxhGUsExTQe/MsY3D9D5rMtu62WRocw9A8FA==
+"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0", "@types/react@>=16", "@types/react@18.2.14":
+  version "18.2.14"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.14.tgz"
+  integrity sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -1422,7 +1446,7 @@ concat-stream@^1.5.2:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-cookie@^0.5.0:
+cookie@^0.5.0, cookie@0.5.0:
   version "0.5.0"
   resolved "https://registry.npmjs.org/cookie/-/cookie-0.5.0.tgz"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
@@ -2951,7 +2975,7 @@ isexe@^2.0.0:
   resolved "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-jose@^4.11.4, jose@^4.14.1:
+jose@^4.11.1, jose@^4.11.4, jose@^4.14.1:
   version "4.14.4"
   resolved "https://registry.npmjs.org/jose/-/jose-4.14.4.tgz"
   integrity sha512-j8GhLiKmUAh+dsFXlX1aJCbt5KMibuKb+d7j1JaOJG6s2UjX1PQlW+OKB/sD4a/5ZYF4RcmYmLSndOoU3Lt/3g==
@@ -3937,6 +3961,11 @@ oauth@^0.9.15:
   resolved "https://registry.npmjs.org/oauth/-/oauth-0.9.15.tgz"
   integrity sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==
 
+oauth4webapi@^2.0.6:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/oauth4webapi/-/oauth4webapi-2.3.0.tgz"
+  integrity sha512-JGkb5doGrwzVDuHwgrR4nHJayzN4h59VCed6EW8Tql6iHDfZIabCJvg6wtbn5q6pyB2hZruI3b77Nudvq7NmvA==
+
 object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
@@ -4077,16 +4106,16 @@ optionator@^0.8.1:
     word-wrap "~1.2.3"
 
 optionator@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.npmjs.org/optionator/-/optionator-0.9.1.tgz"
-  integrity sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==
+  version "0.9.3"
+  resolved "https://registry.npmjs.org/optionator/-/optionator-0.9.3.tgz"
+  integrity sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==
   dependencies:
+    "@aashutoshrathi/word-wrap" "^1.2.3"
     deep-is "^0.1.3"
     fast-levenshtein "^2.0.6"
     levn "^0.4.1"
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
-    word-wrap "^1.2.3"
 
 p-finally@^1.0.0:
   version "1.0.0"
@@ -4290,17 +4319,17 @@ postcss@8.4.14:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-preact-render-to-string@^5.1.19:
-  version "5.2.6"
-  resolved "https://registry.npmjs.org/preact-render-to-string/-/preact-render-to-string-5.2.6.tgz"
-  integrity sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==
+preact-render-to-string@^5.1.19, preact-render-to-string@5.2.3:
+  version "5.2.3"
+  resolved "https://registry.npmjs.org/preact-render-to-string/-/preact-render-to-string-5.2.3.tgz"
+  integrity sha512-aPDxUn5o3GhWdtJtW0svRC2SS/l8D9MAgo2+AWml+BhDImb27ALf04Q2d+AHqUUOc6RdSXFIBVa2gxzgMKgtZA==
   dependencies:
     pretty-format "^3.8.0"
 
-preact@^10.6.3, preact@>=10:
-  version "10.15.1"
-  resolved "https://registry.npmjs.org/preact/-/preact-10.15.1.tgz"
-  integrity sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==
+preact@^10.6.3, preact@>=10, preact@10.11.3:
+  version "10.11.3"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.11.3.tgz"
+  integrity sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -4327,12 +4356,12 @@ pretty-format@^3.8.0:
   resolved "https://registry.npmjs.org/pretty-format/-/pretty-format-3.8.0.tgz"
   integrity sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==
 
-prisma@*, prisma@^4.16.1:
-  version "4.16.1"
-  resolved "https://registry.npmjs.org/prisma/-/prisma-4.16.1.tgz"
-  integrity sha512-C2Xm7yxHxjFjjscBEW4tmoraPHH/Vyu/A0XABdbaFtoiOZARsxvOM7rwc2iZ0qVxbh0bGBGBWZUSXO/52/nHBQ==
+prisma@*, prisma@^4.16.2:
+  version "4.16.2"
+  resolved "https://registry.npmjs.org/prisma/-/prisma-4.16.2.tgz"
+  integrity sha512-SYCsBvDf0/7XSJyf2cHTLjLeTLVXYfqp7pG5eEVafFLeT0u/hLFz/9W196nDRGUOo1JfPatAEb+uEnTQImQC1g==
   dependencies:
-    "@prisma/engines" "4.16.1"
+    "@prisma/engines" "4.16.2"
 
 prismjs@^1.27.0:
   version "1.29.0"
@@ -4719,9 +4748,9 @@ semver@^6.3.0:
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
 semver@^7.3.7:
-  version "7.3.8"
-  resolved "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz"
-  integrity sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==
+  version "7.5.4"
+  resolved "https://registry.npmjs.org/semver/-/semver-7.5.4.tgz"
+  integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
   dependencies:
     lru-cache "^6.0.0"
 
@@ -4981,9 +5010,9 @@ to-regex-range@^5.0.1:
     is-number "^7.0.0"
 
 tough-cookie@^4.0.0:
-  version "4.1.2"
-  resolved "https://registry.npmjs.org/tough-cookie/-/tough-cookie-4.1.2.tgz"
-  integrity sha512-G9fqXWoYFZgTc2z8Q5zaHy/vJMjm+WV0AkAeHxVCQiEB1b+dGvWzFW6QV07cY5jQ5gRkeid2qIkzkxUnmoQZUQ==
+  version "4.1.3"
+  resolved "https://registry.npmjs.org/tough-cookie/-/tough-cookie-4.1.3.tgz"
+  integrity sha512-aX/y5pVRkfRnfmuX+OdbSdXvPe6ieKX/G2s7e98f4poJHnqH3281gDPm/metm6E/WRamfx7WC4HUqkWHfQHprw==
   dependencies:
     psl "^1.1.33"
     punycode "^2.1.1"
@@ -5430,7 +5459,7 @@ wicked-good-xpath@1.3.0:
   resolved "https://registry.npmjs.org/wicked-good-xpath/-/wicked-good-xpath-1.3.0.tgz"
   integrity sha512-Gd9+TUn5nXdwj/hFsPVx5cuHHiF5Bwuc30jZ4+ronF1qHK5O7HD0sgmXWSEgwKquT3ClLoKPVbO6qGwVwLzvAw==
 
-word-wrap@^1.2.3, word-wrap@~1.2.3:
+word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.3.tgz"
   integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==

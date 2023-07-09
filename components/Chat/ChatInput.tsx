@@ -17,19 +17,23 @@ interface Props {
   stopConversationRef: MutableRefObject<boolean>;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
   handleKeyConfigurationValidation: () => boolean;
+  chatInputContent: string;
+  handleChatInputContent: (content: string) => void;
 }
 
-export const ChatInput: FC<Props> = ({
-                                       messageIsStreaming,
-                                       conversationIsEmpty,
-                                       onSend,
-                                       onRegenerate,
-                                       stopConversationRef,
-                                       textareaRef,
-                                       handleKeyConfigurationValidation,
-                                     }) => {
+export const ChatInput: FC<Props> = (
+  {
+    messageIsStreaming,
+    conversationIsEmpty,
+    onSend,
+    onRegenerate,
+    stopConversationRef,
+    textareaRef,
+    handleKeyConfigurationValidation,
+    chatInputContent,
+    handleChatInputContent,
+  }) => {
   const {t} = useTranslation('chat');
-  const [content, setContent] = useState<string>();
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,7 +50,7 @@ export const ChatInput: FC<Props> = ({
       return;
     }
 
-    setContent(value);
+    handleChatInputContent(value);
   };
 
   const handleSend = () => {
@@ -54,13 +58,13 @@ export const ChatInput: FC<Props> = ({
       return;
     }
 
-    if (!content) {
+    if (!chatInputContent) {
       alert(t('Please enter a message'));
       return;
     }
 
-    onSend({role: 'user', content});
-    setContent('');
+    onSend({role: 'user', content: chatInputContent});
+    handleChatInputContent('');
 
     if (window.innerWidth < 640 && textareaRef && textareaRef.current) {
       textareaRef.current.blur();
@@ -92,7 +96,7 @@ export const ChatInput: FC<Props> = ({
         textareaRef?.current?.scrollHeight > 400 ? 'auto' : 'hidden'
       }`;
     }
-  }, [content]);
+  }, [chatInputContent]);
 
   function handleStopConversation() {
     stopConversationRef.current = true;
@@ -143,7 +147,7 @@ export const ChatInput: FC<Props> = ({
               }`,
             }}
             placeholder={t('Type a message...') || ''}
-            value={content}
+            value={chatInputContent}
             rows={1}
             onCompositionStart={() => setIsTyping(true)}
             onCompositionEnd={() => setIsTyping(false)}
@@ -166,7 +170,7 @@ export const ChatInput: FC<Props> = ({
           rel="noreferrer"
           className="underline"
         >
-          vectorhub
+          VectorHub
         </a>
         {' '}
         {t(

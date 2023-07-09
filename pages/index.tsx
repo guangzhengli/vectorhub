@@ -17,6 +17,7 @@ import {ChatFolder, KeyValuePair, Message, ModelType} from "@/types/chat";
 import {Conversation} from "@/types/conversation";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {getSession} from 'next-auth/react';
+import {now} from "next-auth/client/_utils";
 
 interface HomeProps {
   serverSideApiKeyIsSet: boolean;
@@ -109,7 +110,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
 
       let response: Response;
 
-      if (updatedConversation.index.indexName.length === 0) {
+      if (updatedConversation.index.name.length === 0) {
 
         response = await fetch('/api/chat', {
           method: 'POST',
@@ -132,7 +133,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
         });
       } else {
         response = await fetch(
-          `/api/query?message=${message.content}&indexId=${updatedConversation.index.indexId}`, {
+          `/api/query?message=${message.content}&indexId=${updatedConversation.index.id}`, {
             method: 'GET',
             headers: {
               'x-api-type': keyConfiguration.apiType ?? '',
@@ -348,8 +349,12 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
       prompt: DEFAULT_SYSTEM_PROMPT,
       folderId: 0,
       index: {
-        indexName: '',
-        indexId: '',
+        id: '',
+        name: '',
+        description: '',
+        published: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     };
 
@@ -384,8 +389,12 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         folderId: 0,
         index: {
-          indexName: '',
-          indexId: '',
+          id: '',
+          name: '',
+          description: '',
+          published: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       });
       localStorage.removeItem('selectedConversation');
@@ -421,8 +430,12 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
       prompt: DEFAULT_SYSTEM_PROMPT,
       folderId: 0,
       index: {
-        indexName: '',
-        indexId: '',
+        id: '',
+        name: '',
+        description: '',
+        published: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
     localStorage.removeItem('selectedConversation');
@@ -517,8 +530,12 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         folderId: 0,
         index: {
-          indexName: '',
-          indexId: '',
+          id: '',
+          name: '',
+          description: '',
+          published: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       });
     }

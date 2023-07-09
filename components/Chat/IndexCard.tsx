@@ -1,16 +1,13 @@
-import {FC, useCallback, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../ui/card";
 import {Heart} from "lucide-react";
 import {Index} from "../../types/index";
 import {Button} from "@/components/ui/button";
-import {LlamaIndex} from "@/types/llamaIndex";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import { MouseEvent } from 'react';
-import { Badge } from "../ui/badge";
-import {Label} from "@/components/ui/label";
+import {Badge} from "../ui/badge";
 
 interface Props {
-  onIndexChange: (index: LlamaIndex) => void;
+  onIndexChange: (index: Index) => void;
   index: Index
 }
 
@@ -75,7 +72,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
   return (
     <>
       <Card className="rounded-xs cursor-pointer h-48 max-h-64 space-y-4 m-1 shadow-md hover:shadow-lg dark:bg-neutral-900">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" onClick={() => onIndexChange(index)}>
           <CardTitle className="text-xl font-bold">
             {index.name}
           </CardTitle>
@@ -90,7 +87,7 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
               </div>
             </div>
         </CardHeader>
-        <CardContent onClick={() => onIndexChange({indexName: index.name, indexId: index.id})}>
+        <CardContent onClick={() => onIndexChange(index)}>
           <div className="text-sm font-medium">{index.description}</div>
         </CardContent>
         <CardFooter>

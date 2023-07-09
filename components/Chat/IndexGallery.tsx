@@ -1,20 +1,17 @@
 import {useEffect, useState} from "react";
 import {IndexCard} from "./IndexCard";
-import {useSession} from "next-auth/react";
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "../ui/tabs";
 import {Button} from "../ui/button";
 import {ArrowBigDownDash} from "lucide-react";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {Index} from "@/types/index";
-import {LlamaIndex} from "@/types/llamaIndex";
-import {Label} from "@/components/ui/label";
 import {IndexSkeleton} from "./IndexSkeleton";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
   handleKeyConfigurationValidation: () => boolean;
   handleShowIndexFormTabs: (isShowIndexFormTabs: boolean) => void;
-  onIndexChange: (index: LlamaIndex) => void;
+  onIndexChange: (index: Index) => void;
 }
 
 export const IndexGallery = (

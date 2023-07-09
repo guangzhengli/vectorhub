@@ -1,5 +1,5 @@
-import {LlamaIndex} from "@/types/llamaIndex";
 import {Message} from "@/types/chat";
+import {Index} from "@/types/index";
 
 export interface Conversation {
   id: number;
@@ -7,5 +7,5 @@ export interface Conversation {
   messages: Message[];
   prompt: string;
   folderId: number;
-  index: LlamaIndex;
+  index: Index;
 }

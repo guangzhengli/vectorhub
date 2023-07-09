@@ -23,6 +23,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 interface Props {
   conversation: Conversation;
@@ -58,6 +66,7 @@ export const Chat: FC<Props> = memo(
     const {t} = useTranslation('chat');
     const [currentMessage, setCurrentMessage] = useState<Message>();
     const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
+    const [chatInputContent, setChatInputContent] = useState<string>('');
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -69,6 +78,10 @@ export const Chat: FC<Props> = memo(
       }
     };
     const throttledScrollDown = throttle(scrollDown, 250);
+
+    const handleChatInputContent = (content: string) => {
+      setChatInputContent(content);
+    }
 
     useEffect(() => {
       throttledScrollDown();
@@ -114,7 +127,7 @@ export const Chat: FC<Props> = memo(
                 className="max-h-full overflow-x-hidden"
                 ref={chatContainerRef}
               >
-                {(conversation.index?.indexName.length === 0) && (conversation.messages.length === 0) ? (
+                {(conversation.index?.name.length === 0) && (conversation.messages.length === 0) ? (
                   <>
                     <IndexGallery keyConfiguration={keyConfiguration}
                                   handleKeyConfigurationValidation={handleKeyConfigurationValidation}
@@ -128,7 +141,7 @@ export const Chat: FC<Props> = memo(
                 ) : (
                   <>
                     <div className="flex justify-center items-center border border-b-neutral-300 bg-neutral-20 py-2 text-lg text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                      {conversation.index.indexName}
+                      {conversation.index.name}
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
                           <Button variant="link">
@@ -149,6 +162,19 @@ export const Chat: FC<Props> = memo(
                         </AlertDialogContent>
                       </AlertDialog>
                     </div>
+
+                    <Card className="relative mx-auto mt-4 text-base md:max-w-2xl">
+                      <CardHeader>
+                        <CardTitle>Quick tips</CardTitle>
+                        <CardDescription>Here are some good questions</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        {conversation.index.questions?.map((question, index) => (
+                          <p className="mb-2 underline cursor-pointer" key={index} onClick={() => handleChatInputContent(question)}>{index+1}. {question}</p>
+                        ))}
+                      </CardContent>
+                    </Card>
+
                     {conversation.messages.map((message, index) => (
                       <ChatMessage
                         key={index}
@@ -183,6 +209,8 @@ export const Chat: FC<Props> = memo(
                   }
                 }}
                 handleKeyConfigurationValidation={handleKeyConfigurationValidation}
+                chatInputContent={chatInputContent}
+                handleChatInputContent={handleChatInputContent}
               />
             </>
           </div>
