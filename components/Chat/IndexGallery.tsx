@@ -34,7 +34,7 @@ export const IndexGallery = (
 
   useEffect(() => {
     const fetchAllIndexes = async () => {
-      const response = await fetch(`/api/indexes`)
+      const response = await fetch(`/api/indexes?page=${page}`)
       const data = await response.json();
       setIndexes([...indexes, ...data]);
       setIsIndexesLoading(false);
