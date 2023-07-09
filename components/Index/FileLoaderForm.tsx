@@ -180,7 +180,7 @@ export const FileLoaderForm = (
                     </>
                   ) : (
                     <div className="max-w-sm space-x-16">
-                      <Label className="ml-16" htmlFor="index">Choose a file to upload</Label>
+                      <Label className="ml-16" htmlFor="index">Choose a file to upload, max size is {humanFileSize(CHAT_FILES_MAX_SIZE)}</Label>
                       <Input id="index" type="file" className="h-14 mt-2" onChange={(e) => {
                         if (e.target.files && e.target.files[0]) {
                           handleFile(e.target.files[0]).then(r => console.log("upload file success"));

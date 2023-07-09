@@ -125,7 +125,7 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Name</FormLabel><FormLabel className="text-red-500 dark:text-red-700"> *</FormLabel>
                 <FormControl>
                   <Input className="max-w-sm" placeholder="Index name" {...field} />
                 </FormControl>
@@ -141,7 +141,7 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Description</FormLabel><FormLabel className="text-red-500 dark:text-red-700"> *</FormLabel>
                 <FormControl>
                   <Input className="max-w-2xl" placeholder="This is a index for..." {...field} />
                 </FormControl>
@@ -157,7 +157,7 @@ export const IndexForm = ({ indexId, handleShowIndexFormTabs } : Props) => {
             name="prompt"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>User Prompt</FormLabel>
+                <FormLabel>User Prompt (Not Supported Yet - Coming Soon)</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="This is the user prompt for the index."
