@@ -11,7 +11,7 @@ RUN npm ci
 # ---- Build ----
 FROM dependencies AS build
 COPY . .
-RUN prisma generate
+RUN npx prisma generate
 RUN npm run build
 
 # ---- Production ----
