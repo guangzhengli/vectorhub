@@ -1,4 +1,5 @@
 import {Index} from "@/types/index";
+import {Like} from "@/types/like";
 
 export interface User {
   id: string;
@@ -7,5 +8,5 @@ export interface User {
   emailVerified?: Date;
   image?: string;
   indexes?: Index[];
-  likedIndexIds?: string[];
+  likes?: Like[];
 }

@@ -19,18 +19,30 @@ model Document {
 }
 
 model Index {
-  id          String     @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   description String
   prompt      String?
   tags        String[]
   questions   String[]
-  likes       BigInt     @default(0)
-  published   Boolean    @default(true)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  author      User?      @relation(fields: [authorId], references: [id])
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User?    @relation(fields: [authorId], references: [id])
   authorId    String?
+  likesCount  BigInt   @default(0)
+  likes       Like[]
+}
+
+model Like {
+  id      String @id @default(cuid())
+  userId  String @map("user_id")
+  indexId String @map("index_id")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  index Index @relation(fields: [indexId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, indexId])
 }
 
 model Account {
@@ -69,7 +81,7 @@ model User {
   emailVerified DateTime?
   image         String?
   indexes       Index[]
-  likedIndexIds String[]
+  likes         Like[]
   accounts      Account[]
   sessions      Session[]
 }

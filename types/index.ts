@@ -1,4 +1,5 @@
 import {User} from "@/types/user";
+import {Like} from "@/types/like";
 
 export interface Index {
   id: string;
@@ -7,10 +8,11 @@ export interface Index {
   prompt?: string;
   tags?: string[];
   questions?: string[];
-  likes?: bigint;
+  likesCount?: bigint;
   published: boolean;
   createdAt: Date;
   updatedAt: Date;
   authorId?: string;
   author?: User;
+  likes?: Like[];
 }

@@ -17,13 +17,22 @@ CREATE TABLE "Index" (
     "prompt" TEXT,
     "tags" TEXT[],
     "questions" TEXT[],
-    "likes" BIGINT NOT NULL DEFAULT 0,
     "published" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "authorId" TEXT,
+    "likesCount" BIGINT NOT NULL DEFAULT 0,
 
     CONSTRAINT "Index_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Like" (
+    "id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "index_id" TEXT NOT NULL,
+
+    CONSTRAINT "Like_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -63,7 +72,6 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
-    "likedIndexIds" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -82,6 +90,9 @@ CREATE TABLE "VerificationToken" (
 CREATE INDEX "Document_indexId_idx" ON "Document"("indexId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Like_user_id_index_id_key" ON "Like"("user_id", "index_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_provider_account_id_key" ON "Account"("provider", "provider_account_id");
 
 -- CreateIndex
@@ -98,6 +109,12 @@ CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationTok
 
 -- AddForeignKey
 ALTER TABLE "Index" ADD CONSTRAINT "Index_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Like" ADD CONSTRAINT "Like_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Like" ADD CONSTRAINT "Like_index_id_fkey" FOREIGN KEY ("index_id") REFERENCES "Index"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
