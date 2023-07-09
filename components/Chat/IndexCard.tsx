@@ -1,4 +1,4 @@
-import {FC, useCallback, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../ui/card";
 import {Heart} from "lucide-react";
 import {Index} from "../../types/index";
@@ -7,6 +7,7 @@ import {LlamaIndex} from "@/types/llamaIndex";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import { MouseEvent } from 'react';
 import { Badge } from "../ui/badge";
+import {Label} from "@/components/ui/label";
 
 interface Props {
   onIndexChange: (index: LlamaIndex) => void;
@@ -15,9 +16,25 @@ interface Props {
 
 export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
+  const [isIndexCurrentUserLiked, setIsIndexCurrentUserLiked] = useState(!!(index.likes && index.likes.length > 0));
+  const [heartBackground, setHeartBackground] = useState('white');
+
   const handleLikeIndex = () => {
-    console.log("asdfds")
+    if (isIndexCurrentUserLiked) {
+      setIsIndexCurrentUserLiked(false);
+
+    } else {
+      setIsIndexCurrentUserLiked(true);
+    }
   };
+
+  useEffect(() => {
+    if (isIndexCurrentUserLiked) {
+      setHeartBackground('bg-red-500')
+    } else {
+      setHeartBackground('bg-white-500')
+    }
+  }, [isIndexCurrentUserLiked]);
 
   return (
     <>
@@ -53,8 +70,11 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
             </div>
             <div>
               <Button variant="ghost" onClick={handleLikeIndex}>
-                <Heart className="h-4 w-4" />
+                <Heart className="h-4 w-4 @{heartBackground}" />
               </Button>
+            </div>
+            <div>
+              {index.likesCount? index.likesCount.toString() : undefined}
             </div>
           </div>
         </CardFooter>

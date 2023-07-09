@@ -45,7 +45,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
 
   try {
-    const result = await prisma?.index.create({
+    const createdIndex = await prisma?.index.create({
       data: {
         id: id,
         name: name,
@@ -58,7 +58,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         authorId: session?.user?.id
       }
     })
-    res.status(200)
+    res.status(200).json(createdIndex);
   } catch (e) {
     res.status(500).json({message: (e as Error).message});
   }

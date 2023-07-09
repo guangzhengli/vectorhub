@@ -8,7 +8,7 @@ import {KeyConfiguration} from "@/types/keyConfiguration";
 import {Index} from "@/types/index";
 import {LlamaIndex} from "@/types/llamaIndex";
 import {Label} from "@/components/ui/label";
-import { IndexSkeleton } from "./IndexSkeleton";
+import {IndexSkeleton} from "./IndexSkeleton";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
@@ -24,7 +24,6 @@ export const IndexGallery = (
     handleShowIndexFormTabs,
     onIndexChange
   }: Props) => {
-  const {data: session, status} = useSession();
   const [page, setPage] = useState(1);
   const [indexes, setIndexes] = useState<Index[]>([])
   const [isIndexesLoading, setIsIndexesLoading] = useState(true);
@@ -44,7 +43,7 @@ export const IndexGallery = (
 
   useEffect(() => {
     const fetchUserIndexes = async () => {
-      const response = await fetch(`/api/indexes/user/${session?.user?.id}`)
+      const response = await fetch(`/api/indexes/user`)
       const data = await response.json();
       setUserIndexes(data);
       setIsUserIndexesLoading(false);
@@ -54,7 +53,7 @@ export const IndexGallery = (
 
   useEffect(() => {
     const fetchUserLikedIndexes = async () => {
-      const response = await fetch(`/api/indexes/user/${session?.user?.id}/likes`)
+      const response = await fetch(`/api/indexes/user/likes`)
       const data = await response.json();
       setUserLikedIndexes(data);
     };
@@ -76,22 +75,22 @@ export const IndexGallery = (
             <TabsTrigger value="created">Created</TabsTrigger>
             <TabsTrigger value="likeed">Liked</TabsTrigger>
           </TabsList>
-          { isUserIndexesLoading ? (
-            <IndexSkeleton />
-          ) : 
+          {isUserIndexesLoading ? (
+              <IndexSkeleton/>
+            ) :
             <TabsContent value="created" className="space-y-4">
-            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
-              {userIndexes.map((index) => (
-                <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
-              ))}
-            </div>
-          </TabsContent>
+              <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
+                {userIndexes.map((index) => (
+                  <IndexCard key={index.id} index={index} onIndexChange={onIndexChange}/>
+                ))}
+              </div>
+            </TabsContent>
           }
 
           <TabsContent value="likeed" className="space-y-4">
             <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
               {userLikedIndexes.map((index) => (
-                <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
+                <IndexCard key={index.id} index={index} onIndexChange={onIndexChange}/>
               ))}
             </div>
           </TabsContent>
@@ -99,21 +98,25 @@ export const IndexGallery = (
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl text-black font-bold tracking-tight dark:text-white">Vector Hub</h2>
         </div>
-          { isIndexesLoading ? (
-            <IndexSkeleton />
-          ) : 
-            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
-              {indexes.map((index) => (
-                <IndexCard key={index.id} index={index} onIndexChange={onIndexChange} />
-              ))}
-            </div>
-            
-          }
+        {isIndexesLoading ? (
+            <IndexSkeleton/>
+          ) :
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-2">
+            {indexes.map((index) => (
+              <IndexCard key={index.id} index={index} onIndexChange={onIndexChange}/>
+            ))}
+          </div>
+
+        }
+
+        {indexes.length >= 20 && (
           <div className="flex justify-center text-black dark:text-white">
             <Button variant="outline" onClick={handleLoadMore}>
               <ArrowBigDownDash className="mr-2 h-4 w-4"/> Load More
             </Button>
           </div>
+        )}
+
       </div>
     </>
   )
