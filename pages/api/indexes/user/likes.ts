@@ -68,7 +68,7 @@ const handleDelete = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   });
 
-  res.status(200);
+  res.status(200).json({message: "unliked successfully"});
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

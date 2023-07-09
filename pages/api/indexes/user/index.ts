@@ -13,12 +13,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         where: {
             authorId: session?.user?.id as string,
         },
-        select: {
-            id: true,
-            name: true,
-            description: true,
-            tags: true,
-            likesCount: true,
+        include: {
+            likes: {
+                where: {
+                    userId: session?.user?.id as string,
+                }
+            },
             author: {
                 select: {
                     name: true,

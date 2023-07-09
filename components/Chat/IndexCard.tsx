@@ -17,22 +17,51 @@ interface Props {
 export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
   const [isIndexCurrentUserLiked, setIsIndexCurrentUserLiked] = useState(!!(index.likes && index.likes.length > 0));
-  const [heartBackground, setHeartBackground] = useState('white');
+  const [heartBackground, setHeartBackground] = useState('');
 
-  const handleLikeIndex = () => {
+  const handleLikeIndex = async () => {
     if (isIndexCurrentUserLiked) {
-      setIsIndexCurrentUserLiked(false);
-
+      setHeartBackground('')
+      await fetch('/api/indexes/user/likes', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          indexId: index.id,
+        })
+      }).then(async (res) => {
+        if (!res.ok) {
+          const message = await res.text();
+          console.log(`like index error: ${message}, the index id is ${index.id}`);
+        } else {
+          setIsIndexCurrentUserLiked(false);
+        }
+      });
     } else {
-      setIsIndexCurrentUserLiked(true);
+      setHeartBackground("text-red-600 dark: text-red-700")
+      await fetch('/api/indexes/user/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          indexId: index.id,
+        })
+      }).then(async (res) => {
+        if (!res.ok) {
+          const message = await res.text();
+          console.log(`like index error: ${message}, the index id is ${index.id}`);
+        } else {
+          setIsIndexCurrentUserLiked(true);
+        }
+      });
     }
   };
 
   useEffect(() => {
     if (isIndexCurrentUserLiked) {
-      setHeartBackground('bg-red-500')
-    } else {
-      setHeartBackground('bg-white-500')
+      setHeartBackground("text-red-600 dark: text-red-700")
     }
   }, [isIndexCurrentUserLiked]);
 
@@ -70,11 +99,9 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
             </div>
             <div>
               <Button variant="ghost" onClick={handleLikeIndex}>
-                <Heart className="h-4 w-4 @{heartBackground}" />
+                <Heart className={heartBackground} />
+                {index.likesCount? index.likesCount.toString() : undefined}
               </Button>
-            </div>
-            <div>
-              {index.likesCount? index.likesCount.toString() : undefined}
             </div>
           </div>
         </CardFooter>
