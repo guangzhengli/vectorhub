@@ -4,6 +4,7 @@ import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {FileLoaderForm} from "@/components/Index/FileLoaderForm";
 import {KeyConfiguration} from "@/types/keyConfiguration";
 import {Button} from "@/components/ui/button";
+import {WebLoaderForm} from "@/components/Index/WebLoaderForm";
 
 interface Props {
   keyConfiguration: KeyConfiguration;
@@ -41,16 +42,14 @@ export const IndexFormTabs = (
           <TabsContent className="mt-2" value="webloader">
             <Card>
               <CardHeader>
-                <CardTitle>WebLoader</CardTitle>
-                <CardDescription>
+                <CardTitle className="ml-10">WebLoader</CardTitle>
+                <CardDescription className="ml-10">
                   Use Web page to upload your vector.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="current">Coming Soon....</Label>
-                </div>
-              </CardContent>
+              <WebLoaderForm keyConfiguration={keyConfiguration}
+                              handleKeyConfigurationValidation={handleKeyConfigurationValidation}
+                              handleShowIndexFormTabs={handleShowIndexFormTabs}/>
             </Card>
           </TabsContent>
         </Tabs>

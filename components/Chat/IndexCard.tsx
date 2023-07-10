@@ -71,46 +71,46 @@ export const IndexCard: FC<Props> = ({index, onIndexChange}: Props) => {
 
   return (
     <>
-      <Card className="rounded-xs cursor-pointer h-48 max-h-64 space-y-4 m-1 shadow-md hover:shadow-lg dark:bg-neutral-900">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" onClick={() => onIndexChange(index)}>
+      <Card
+        className="flex flex-col h-full rounded-xs cursor-pointer m-1 shadow-md hover:shadow-lg dark:bg-neutral-900">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"
+                    onClick={() => onIndexChange(index)}>
           <CardTitle className="text-xl font-bold">
             {index.name}
           </CardTitle>
-            <div className="flex items-center space-x-2">
-              <Avatar className="h-6 w-6">
-                <AvatarImage
-                  src={index.author?.image ? index.author?.image : 'https://avatars.githubusercontent.com/u/138222923'}/>
-                <AvatarFallback>OM</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-sm font-medium leading-none">{index.author?.name ? index.author?.name : 'unknown'}</p>
-              </div>
+          <div className="flex items-center space-x-2">
+            <Avatar className="h-6 w-6">
+              <AvatarImage
+                src={index.author?.image ? index.author?.image : 'https://avatars.githubusercontent.com/u/138222923'}/>
+              <AvatarFallback>OM</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-medium leading-none">{index.author?.name ? index.author?.name : 'unknown'}</p>
             </div>
+          </div>
         </CardHeader>
-        <CardContent onClick={() => onIndexChange(index)}>
+        <CardContent className="mt-4" onClick={() => onIndexChange(index)}>
           <div className="text-sm font-medium">{index.description}</div>
         </CardContent>
-        <CardFooter>
-          <div className="flex justify-between items-center space-x-2 w-full">
+          <CardFooter className="mt-auto flex justify-between items-center space-x-2 w-full">
             <div className="rounded-none mr-1">
-              { index.tags && index.tags.length > 0 && (
+              {index.tags && index.tags.length > 0 && (
                 <>
-                  { index.tags.map((tag, key) => (
+                  {index.tags.map((tag, key) => (
                     <Badge key={key} variant="outline" className="mr-1">{tag}</Badge>
-                  )) }
+                  ))}
                 </>
               )}
             </div>
             <div>
               <Button variant="ghost" onClick={handleLikeIndex}>
-                <Heart className={heartBackground} />
+                <Heart className={heartBackground}/>
                 <div className="ml-2">
                   {indexLikesCount?.toString()}
                 </div>
               </Button>
             </div>
-          </div>
-        </CardFooter>
+          </CardFooter>
       </Card>
     </>
   )
