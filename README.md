@@ -43,4 +43,12 @@ Zhang Andy&nbsp;&nbsp;
 <!-- real-sponsors -->
 </p>
 
+## License
 
+### Commercial license
+
+If you want to use vectorhub to develop commercial sites, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. Purchase a Commercial License by [contacting me](mailto: iguangzhengli@gmail.com).
+
+### Open source license
+
+If you are creating an open source application under a license compatible with the [GNU GPL license v3](https://www.gnu.org/licenses/gpl-3.0.html), you may use vectorhub under the terms of the GPLv3.
