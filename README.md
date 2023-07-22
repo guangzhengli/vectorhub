@@ -46,7 +46,9 @@ https://guangzhengli.com/sponsors
 
 ### Commercial license
 
-If you want to use vectorhub to develop commercial sites, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. Purchase a Commercial License by [contacting me](mailto: iguangzhengli@gmail.com).
+If you want to use vectorhub to develop commercial sites, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. 
+
+Purchase a Commercial License by [contacting me](mailto: iguangzhengli@gmail.com).
 
 ### Open source license
 
