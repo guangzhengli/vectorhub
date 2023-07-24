@@ -4,6 +4,8 @@
 
 ## Deploy with Vercel
 
+### Live Demo: https://chat.vectorhub.org
+
 <p align="center">
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fguangzhengli%2Fvectorhub&env=NEXT_PUBLIC_CHAT_FILES_UPLOAD_PATH&envDescription=Have%20a%20conversation%20with%20vector&envLink=https%3A%2F%2Fgithub.com%2Fguangzhengli%2Fvectorhub%2Fblob%2Fmain%2Fdoc%2Fenv-vars.md&demo-title=VectorHub&demo-description=Have%20a%20conversation%20with%20vector&demo-url=https%3A%2F%2Fchat.vectorhub.org%2F"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
 </p>
