@@ -7,6 +7,7 @@ import {getVectorStore} from "@/utils/vector";
 import { PrismaClient } from '@prisma/client';
 
 const folderPath = NEXT_PUBLIC_CHAT_FILES_UPLOAD_PATH;
+export const runtime = 'edge'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log("beginning embedding handler");

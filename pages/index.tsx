@@ -19,6 +19,7 @@ import {KeyConfiguration} from "@/types/keyConfiguration";
 import {getSession} from 'next-auth/react';
 import {now} from "next-auth/client/_utils";
 
+
 interface HomeProps {
   serverSideApiKeyIsSet: boolean;
 }

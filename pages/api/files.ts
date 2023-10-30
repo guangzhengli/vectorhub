@@ -4,6 +4,8 @@ import fs from 'fs';
 import AdmZip from 'adm-zip';
 import {NEXT_PUBLIC_CHAT_FILES_UPLOAD_PATH} from "@/utils/app/const";
 
+export const runtime = 'edge'
+
 export const config = {
     api: {
         bodyParser: false,

@@ -8,6 +8,7 @@ import GoogleProvider from "next-auth/providers/google";
 import {prisma} from '@/lib/prisma';
 import {AuthOptions} from "next-auth";
 import CognitoProvider from "next-auth/providers/cognito";
+export const runtime = 'edge'
 
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
 

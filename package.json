@@ -67,6 +67,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.7.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/cookie": "^0.5.1",
     "@types/formidable": "^2.0.5",

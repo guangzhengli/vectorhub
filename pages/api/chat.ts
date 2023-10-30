@@ -9,6 +9,7 @@ import {BufferMemory, ChatMessageHistory} from "langchain/memory";
 import {LLMChain} from "langchain/chains";
 import {ChatBody} from "@/types/chat";
 
+export const runtime = 'edge'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { messages, prompt } = req.body as ChatBody;

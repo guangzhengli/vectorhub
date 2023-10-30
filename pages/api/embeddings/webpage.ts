@@ -5,6 +5,8 @@ import {getSplitterDocument} from "@/utils/langchain/splitter";
 import {getVectorStore} from "@/utils/vector";
 import {PrismaClient} from "@prisma/client";
 
+export const runtime = 'edge'
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log("beginning webpage embedding handler");
   const keyConfiguration = getKeyConfiguration(req);

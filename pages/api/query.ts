@@ -4,6 +4,8 @@ import {loadQAStuffChain} from "langchain/chains";
 import { getKeyConfiguration } from '@/utils/app/configuration';
 import {getVectorStore} from "@/utils/vector";
 
+export const runtime = 'edge'
+
 export const config = {
     api: {
         bodyParser: false,
