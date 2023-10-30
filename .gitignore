@@ -38,6 +38,8 @@ next-env.d.ts
 .idea
 
 public/uploads/*
+package-lock.json
+
 
 .env
 
