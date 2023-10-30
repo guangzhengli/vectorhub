@@ -39,7 +39,7 @@ next-env.d.ts
 
 public/uploads/*
 package-lock.json
-
+*-lock.json
 
 .env
 
