@@ -1,10 +1,8 @@
-[![My Skills](https://skillicons.dev/icons?i=nextjs,tailwind,react,vercel,ts,supabase)](https://skillicons.dev)<a href="https://www.buymeacoffee.com/iguangzhengli" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >[![](https://dcbadge.vercel.app/api/server/kSEuQ4WbGb)](https://discord.gg/kSEuQ4WbGb)
+[![My Skills](https://skillicons.dev/icons?i=nextjs,tailwind,react,vercel,ts,supabase)](https://skillicons.dev)<a href="https://www.buymeacoffee.com/iguangzhengli" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >
 
 # VectorHub
 
 ## Deploy with Vercel
-
-### Live Demo: https://chat.vectorhub.org
 
 <p align="center">
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fguangzhengli%2Fvectorhub&env=NEXT_PUBLIC_CHAT_FILES_UPLOAD_PATH&envDescription=Have%20a%20conversation%20with%20vector&envLink=https%3A%2F%2Fgithub.com%2Fguangzhengli%2Fvectorhub%2Fblob%2Fmain%2Fdoc%2Fenv-vars.md&demo-title=VectorHub&demo-description=Have%20a%20conversation%20with%20vector&demo-url=https%3A%2F%2Fchat.vectorhub.org%2F"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
