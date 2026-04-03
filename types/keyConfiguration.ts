@@ -9,4 +9,5 @@ export interface KeyConfiguration {
   azureApiVersion?: string;
   azureDeploymentName?: string;
   azureEmbeddingDeploymentName?: string;
+  minimaxApiKey?: string;
 }

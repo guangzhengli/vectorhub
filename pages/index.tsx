@@ -46,6 +46,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
     azureApiVersion: '',
     azureDeploymentName: '',
     azureEmbeddingDeploymentName: '',
+    minimaxApiKey: '',
   });
   const stopConversationRef = useRef<boolean>(false);
 
@@ -69,7 +70,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
     setIsShowIndexFormTabs(isShowIndexForm);
   }
   const handleKeyConfigurationValidation = (): boolean => {
-    if (!serverSideApiKeyIsSet && !keyConfiguration.apiKey && !keyConfiguration.azureApiKey) {
+    if (!serverSideApiKeyIsSet && !keyConfiguration.apiKey && !keyConfiguration.azureApiKey && !keyConfiguration.minimaxApiKey) {
       setShowKeyConfigurationAlert(true);
       return false;
     }
@@ -124,6 +125,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
             'x-azure-api-version': keyConfiguration.azureApiVersion ?? '',
             'x-azure-deployment-name': keyConfiguration.azureDeploymentName ?? '',
             'x-azure-embedding-deployment-name': keyConfiguration.azureEmbeddingDeploymentName ?? '',
+            'x-minimax-api-key': keyConfiguration.minimaxApiKey ?? '',
           },
           signal: controller.signal,
           body: JSON.stringify({
@@ -144,6 +146,7 @@ const Home: React.FC<HomeProps> = ({serverSideApiKeyIsSet}) => {
               'x-azure-api-version': keyConfiguration.azureApiVersion ?? '',
               'x-azure-deployment-name': keyConfiguration.azureDeploymentName ?? '',
               'x-azure-embedding-deployment-name': keyConfiguration.azureEmbeddingDeploymentName ?? '',
+              'x-minimax-api-key': keyConfiguration.minimaxApiKey ?? '',
             },
           });
       }
