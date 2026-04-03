@@ -30,6 +30,7 @@ export const KeySettings: FC<Props> = ({
         azureApiVersion: keyConfiguration.azureApiVersion,
         azureDeploymentName: keyConfiguration.azureDeploymentName,
         azureEmbeddingDeploymentName: keyConfiguration.azureEmbeddingDeploymentName,
+        minimaxApiKey: keyConfiguration.minimaxApiKey,
     })
 
     const handleOpenAISubmit = () => {
@@ -39,6 +40,11 @@ export const KeySettings: FC<Props> = ({
 
     const handleAzureOpenAISubmit = () => {
         fromKeyConfiguration.apiType = ModelType.AZURE_OPENAI;
+        onKeyConfigurationChange(fromKeyConfiguration);
+    };
+
+    const handleMiniMaxSubmit = () => {
+        fromKeyConfiguration.apiType = ModelType.MINIMAX;
         onKeyConfigurationChange(fromKeyConfiguration);
     };
 
@@ -66,12 +72,13 @@ export const KeySettings: FC<Props> = ({
                 </SheetTrigger>
                 <SheetContent position="left" size="sm">
                     <SheetHeader>
-                    <SheetTitle>OpenAI Key Configuration</SheetTitle>
+                    <SheetTitle>Key Configuration</SheetTitle>
                     </SheetHeader>
                     <Tabs defaultValue="openai" className="w-full mt-4">
-                        <TabsList className="grid w-full grid-cols-2">
+                        <TabsList className="grid w-full grid-cols-3">
                             <TabsTrigger value="openai">OpenAI</TabsTrigger>
                             <TabsTrigger value="azure openai">Azure OpenAI</TabsTrigger>
+                            <TabsTrigger value="minimax">MiniMax</TabsTrigger>
                         </TabsList>
                         <TabsContent value="openai">
                             <Card>
@@ -141,6 +148,43 @@ export const KeySettings: FC<Props> = ({
                             <CardFooter>
                                 <SheetClose asChild>
                                     <Button className="mx-auto mt-4 w-64" type="submit" onClick={handleAzureOpenAISubmit}>Save</Button>
+                                </SheetClose>
+                            </CardFooter>
+                            </Card>
+                        </TabsContent>
+                        <TabsContent value="minimax">
+                            <Card>
+                            <CardHeader>
+                                <CardTitle>MiniMax</CardTitle>
+                                <CardDescription className='pt-4'>
+                                Configure your MiniMax API key for LLM inference. Get your key at
+                                {' '}<a href="https://platform.minimaxi.com" target="_blank" rel="noreferrer" className="underline">platform.minimaxi.com</a>.
+                                Note: embeddings still use OpenAI; set the OpenAI key above if you use document indexing.
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                                <div className="space-y-2">
+                                <Label htmlFor="minimaxApiKey">MiniMax API Key</Label>
+                                <Input id="minimaxApiKey" type="password" placeholder="MiniMax API key" name="minimaxApiKey" value={fromKeyConfiguration.minimaxApiKey} onChange={handleChange}/>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="minimaxModel">Model</Label>
+                                    <Select value={fromKeyConfiguration.apiModel} onValueChange={handleApiModelSelect}>
+                                        <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="MiniMax-M2.7" defaultValue={fromKeyConfiguration.apiModel} />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="MiniMax-M2.7">MiniMax-M2.7</SelectItem>
+                                            <SelectItem value="MiniMax-M2.7-highspeed">MiniMax-M2.7-highspeed</SelectItem>
+                                            <SelectItem value="MiniMax-M2.5">MiniMax-M2.5</SelectItem>
+                                            <SelectItem value="MiniMax-M2.5-highspeed">MiniMax-M2.5-highspeed</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </CardContent>
+                            <CardFooter>
+                                <SheetClose asChild>
+                                    <Button className="mx-auto mt-4 w-64" type="submit" onClick={handleMiniMaxSubmit}>Save</Button>
                                 </SheetClose>
                             </CardFooter>
                             </Card>

@@ -2,6 +2,14 @@
 
 # VectorHub
 
+## LLM Providers
+
+VectorHub supports multiple LLM providers for the chat backend:
+
+- **OpenAI** — set `OPENAI_TYPE=OPENAI` and `OPENAI_API_KEY`
+- **Azure OpenAI** — set `OPENAI_TYPE=AZURE_OPENAI` and the corresponding Azure keys
+- **[MiniMax](https://platform.minimaxi.com)** — set `OPENAI_TYPE=MINIMAX` and `MINIMAX_API_KEY`. Supported models: `MiniMax-M2.7`, `MiniMax-M2.7-highspeed`, `MiniMax-M2.5`, `MiniMax-M2.5-highspeed` (204K context window). You can also select MiniMax from the in-app key settings panel.
+
 ## Deploy with Vercel
 
 <p align="center">

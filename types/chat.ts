@@ -1,6 +1,7 @@
 export enum ModelType {
   OPENAI = 'OPENAI',
   AZURE_OPENAI = 'AZURE_OPENAI',
+  MINIMAX = 'MINIMAX',
 }
 
 export interface Message {

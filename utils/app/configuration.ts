@@ -5,6 +5,8 @@ import {
     AZURE_OPENAI_API_INSTANCE_NAME,
     AZURE_OPENAI_API_KEY,
     AZURE_OPENAI_API_VERSION,
+    MINIMAX_API_KEY,
+    MINIMAX_API_MODEL,
     OPENAI_API_KEY,
     OPENAI_API_MODEL,
     OPENAI_TYPE
@@ -28,14 +30,16 @@ const getKeyConfigurationFromReqHeaders = (req: NextApiRequest): KeyConfiguratio
     const azureApiVersion = req.headers['x-azure-api-version'] as string;
     const azureDeploymentName = req.headers['x-azure-deployment-name'] as string;
     const azureEmbeddingDeploymentName = req.headers['x-azure-embedding-deployment-name'] as string;
-    const keyConfiguration = { apiType: apiType as ModelType, 
+    const minimaxApiKey = req.headers['x-minimax-api-key'] as string;
+    const keyConfiguration = { apiType: apiType as ModelType,
         apiKey,
         apiModel,
-        azureApiKey, 
-        azureInstanceName, 
-        azureApiVersion, 
-        azureDeploymentName, 
-        azureEmbeddingDeploymentName
+        azureApiKey,
+        azureInstanceName,
+        azureApiVersion,
+        azureDeploymentName,
+        azureEmbeddingDeploymentName,
+        minimaxApiKey,
     };
     validateKeyConfiguration(keyConfiguration);
     return keyConfiguration;
@@ -50,16 +54,19 @@ const getKeyConfigurationFromEnvironment = (): KeyConfiguration => {
     const azureApiVersion = AZURE_OPENAI_API_VERSION;
     const azureDeploymentName = AZURE_OPENAI_API_DEPLOYMENT_NAME;
     const azureEmbeddingDeploymentName = AZURE_OPENAI_API_EMBEDDINGS_DEPLOYMENT_NAME;
+    const minimaxApiKey = MINIMAX_API_KEY;
+    const minimaxApiModel = MINIMAX_API_MODEL;
 
     const keyConfiguration = {
         apiType,
         apiKey,
-        apiModel,
+        apiModel: apiType === ModelType.MINIMAX ? (minimaxApiModel || apiModel) : apiModel,
         azureApiKey,
-        azureInstanceName, 
-        azureApiVersion, 
-        azureDeploymentName, 
-        azureEmbeddingDeploymentName
+        azureInstanceName,
+        azureApiVersion,
+        azureDeploymentName,
+        azureEmbeddingDeploymentName,
+        minimaxApiKey,
     };
     validateKeyConfiguration(keyConfiguration);
     return keyConfiguration;
@@ -73,6 +80,9 @@ const validateKeyConfiguration = (keyConfiguration: KeyConfiguration): boolean =
         if (!keyConfiguration.azureApiKey || !keyConfiguration.azureInstanceName || !keyConfiguration.azureApiVersion || !keyConfiguration.azureDeploymentName || !keyConfiguration.azureEmbeddingDeploymentName) {
             throw new Error(`Expected environment value: AZURE_OPENAI_API_KEY`);
         }
+    }
+    if (keyConfiguration.apiType === ModelType.MINIMAX) {
+        if (!keyConfiguration.minimaxApiKey) throw new Error(`Expected environment value: MINIMAX_API_KEY`);
     }
     return true;
 }
